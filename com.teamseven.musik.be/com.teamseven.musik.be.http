@@ -1,0 +1,6 @@
+@com.teamseven.musik.be_HostAddress = http://localhost:5220
+
+GET {{com.teamseven.musik.be_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
