@@ -5516,11 +5516,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\tritri\\source\\repos\\com.teamseven.musik.be\\com.teamseven.musik.be\\com.teamseven.musik.be.csproj",
+      "projectUniqueName": "C:\\com.teamseven.musik.be\\com.teamseven.musik.be\\com.teamseven.musik.be.csproj",
       "projectName": "com.teamseven.musik.be",
-      "projectPath": "C:\\Users\\tritri\\source\\repos\\com.teamseven.musik.be\\com.teamseven.musik.be\\com.teamseven.musik.be.csproj",
+      "projectPath": "C:\\com.teamseven.musik.be\\com.teamseven.musik.be\\com.teamseven.musik.be.csproj",
       "packagesPath": "C:\\Users\\tritri\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\tritri\\source\\repos\\com.teamseven.musik.be\\com.teamseven.musik.be\\obj\\",
+      "outputPath": "C:\\com.teamseven.musik.be\\com.teamseven.musik.be\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

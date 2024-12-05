@@ -1,29 +1,29 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\tritri\\source\\repos\\com.teamseven.musik.be\\",
+  "WorkspaceRootPath": "C:\\com.teamseven.musik.be\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{5AAF145C-BCCB-4379-A60F-73CEB8AD9C5B}|com.teamseven.musik.be\\com.teamseven.musik.be.csproj|c:\\users\\tritri\\source\\repos\\com.teamseven.musik.be\\com.teamseven.musik.be\\controllers\\testapi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5AAF145C-BCCB-4379-A60F-73CEB8AD9C5B}|com.teamseven.musik.be\\com.teamseven.musik.be.csproj|solutionrelative:com.teamseven.musik.be\\controllers\\testapi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5AAF145C-BCCB-4379-A60F-73CEB8AD9C5B}|com.teamseven.musik.be\\com.teamseven.musik.be.csproj|c:\\users\\tritri\\source\\repos\\com.teamseven.musik.be\\com.teamseven.musik.be\\controllers\\weatherforecastcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5AAF145C-BCCB-4379-A60F-73CEB8AD9C5B}|com.teamseven.musik.be\\com.teamseven.musik.be.csproj|solutionrelative:com.teamseven.musik.be\\controllers\\weatherforecastcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5AAF145C-BCCB-4379-A60F-73CEB8AD9C5B}|com.teamseven.musik.be\\com.teamseven.musik.be.csproj|c:\\users\\tritri\\source\\repos\\com.teamseven.musik.be\\com.teamseven.musik.be\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{5AAF145C-BCCB-4379-A60F-73CEB8AD9C5B}|com.teamseven.musik.be\\com.teamseven.musik.be.csproj|c:\\com.teamseven.musik.be\\com.teamseven.musik.be\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{5AAF145C-BCCB-4379-A60F-73CEB8AD9C5B}|com.teamseven.musik.be\\com.teamseven.musik.be.csproj|solutionrelative:com.teamseven.musik.be\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5AAF145C-BCCB-4379-A60F-73CEB8AD9C5B}|com.teamseven.musik.be\\com.teamseven.musik.be.csproj|c:\\users\\tritri\\source\\repos\\com.teamseven.musik.be\\com.teamseven.musik.be\\weatherforecast.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{5AAF145C-BCCB-4379-A60F-73CEB8AD9C5B}|com.teamseven.musik.be\\com.teamseven.musik.be.csproj|c:\\com.teamseven.musik.be\\com.teamseven.musik.be\\controllers\\testapi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AAF145C-BCCB-4379-A60F-73CEB8AD9C5B}|com.teamseven.musik.be\\com.teamseven.musik.be.csproj|solutionrelative:com.teamseven.musik.be\\controllers\\testapi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AAF145C-BCCB-4379-A60F-73CEB8AD9C5B}|com.teamseven.musik.be\\com.teamseven.musik.be.csproj|c:\\com.teamseven.musik.be\\com.teamseven.musik.be\\controllers\\weatherforecastcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AAF145C-BCCB-4379-A60F-73CEB8AD9C5B}|com.teamseven.musik.be\\com.teamseven.musik.be.csproj|solutionrelative:com.teamseven.musik.be\\controllers\\weatherforecastcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AAF145C-BCCB-4379-A60F-73CEB8AD9C5B}|com.teamseven.musik.be\\com.teamseven.musik.be.csproj|c:\\com.teamseven.musik.be\\com.teamseven.musik.be\\weatherforecast.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{5AAF145C-BCCB-4379-A60F-73CEB8AD9C5B}|com.teamseven.musik.be\\com.teamseven.musik.be.csproj|solutionrelative:com.teamseven.musik.be\\weatherforecast.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5AAF145C-BCCB-4379-A60F-73CEB8AD9C5B}|com.teamseven.musik.be\\com.teamseven.musik.be.csproj|c:\\users\\tritri\\source\\repos\\com.teamseven.musik.be\\com.teamseven.musik.be\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "AbsoluteMoniker": "D:0:0:{5AAF145C-BCCB-4379-A60F-73CEB8AD9C5B}|com.teamseven.musik.be\\com.teamseven.musik.be.csproj|c:\\com.teamseven.musik.be\\com.teamseven.musik.be\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{5AAF145C-BCCB-4379-A60F-73CEB8AD9C5B}|com.teamseven.musik.be\\com.teamseven.musik.be.csproj|solutionrelative:com.teamseven.musik.be\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5AAF145C-BCCB-4379-A60F-73CEB8AD9C5B}|com.teamseven.musik.be\\com.teamseven.musik.be.csproj|c:\\users\\tritri\\source\\repos\\com.teamseven.musik.be\\com.teamseven.musik.be\\com.teamseven.musik.be.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|",
+      "AbsoluteMoniker": "D:0:0:{5AAF145C-BCCB-4379-A60F-73CEB8AD9C5B}|com.teamseven.musik.be\\com.teamseven.musik.be.csproj|c:\\com.teamseven.musik.be\\com.teamseven.musik.be\\com.teamseven.musik.be.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|",
       "RelativeMoniker": "D:0:0:{5AAF145C-BCCB-4379-A60F-73CEB8AD9C5B}|com.teamseven.musik.be\\com.teamseven.musik.be.csproj|solutionrelative:com.teamseven.musik.be\\com.teamseven.musik.be.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
     }
   ],
@@ -34,7 +34,7 @@
       "DocumentGroups": [
         {
           "DockedHeight": 11,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -46,11 +46,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "TestAPI.cs",
-              "DocumentMoniker": "C:\\Users\\tritri\\source\\repos\\com.teamseven.musik.be\\com.teamseven.musik.be\\Controllers\\TestAPI.cs",
+              "DocumentMoniker": "C:\\com.teamseven.musik.be\\com.teamseven.musik.be\\Controllers\\TestAPI.cs",
               "RelativeDocumentMoniker": "com.teamseven.musik.be\\Controllers\\TestAPI.cs",
-              "ToolTip": "C:\\Users\\tritri\\source\\repos\\com.teamseven.musik.be\\com.teamseven.musik.be\\Controllers\\TestAPI.cs",
+              "ToolTip": "C:\\com.teamseven.musik.be\\com.teamseven.musik.be\\Controllers\\TestAPI.cs",
               "RelativeToolTip": "com.teamseven.musik.be\\Controllers\\TestAPI.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -61,24 +61,23 @@
               "$type": "Document",
               "DocumentIndex": 4,
               "Title": "launchSettings.json",
-              "DocumentMoniker": "C:\\Users\\tritri\\source\\repos\\com.teamseven.musik.be\\com.teamseven.musik.be\\Properties\\launchSettings.json",
+              "DocumentMoniker": "C:\\com.teamseven.musik.be\\com.teamseven.musik.be\\Properties\\launchSettings.json",
               "RelativeDocumentMoniker": "com.teamseven.musik.be\\Properties\\launchSettings.json",
-              "ToolTip": "C:\\Users\\tritri\\source\\repos\\com.teamseven.musik.be\\com.teamseven.musik.be\\Properties\\launchSettings.json",
+              "ToolTip": "C:\\com.teamseven.musik.be\\com.teamseven.musik.be\\Properties\\launchSettings.json",
               "RelativeToolTip": "com.teamseven.musik.be\\Properties\\launchSettings.json",
               "ViewState": "AgIAAAEAAAAAAAAAAAAowBsAAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-12-04T08:36:21.317Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-04T08:36:21.317Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\tritri\\source\\repos\\com.teamseven.musik.be\\com.teamseven.musik.be\\Program.cs",
+              "DocumentMoniker": "C:\\com.teamseven.musik.be\\com.teamseven.musik.be\\Program.cs",
               "RelativeDocumentMoniker": "com.teamseven.musik.be\\Program.cs",
-              "ToolTip": "C:\\Users\\tritri\\source\\repos\\com.teamseven.musik.be\\com.teamseven.musik.be\\Program.cs",
+              "ToolTip": "C:\\com.teamseven.musik.be\\com.teamseven.musik.be\\Program.cs",
               "RelativeToolTip": "com.teamseven.musik.be\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAuAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-04T08:35:02.43Z",
               "EditorCaption": ""
@@ -87,39 +86,36 @@
               "$type": "Document",
               "DocumentIndex": 3,
               "Title": "WeatherForecast.cs",
-              "DocumentMoniker": "C:\\Users\\tritri\\source\\repos\\com.teamseven.musik.be\\com.teamseven.musik.be\\WeatherForecast.cs",
+              "DocumentMoniker": "C:\\com.teamseven.musik.be\\com.teamseven.musik.be\\WeatherForecast.cs",
               "RelativeDocumentMoniker": "com.teamseven.musik.be\\WeatherForecast.cs",
-              "ToolTip": "C:\\Users\\tritri\\source\\repos\\com.teamseven.musik.be\\com.teamseven.musik.be\\WeatherForecast.cs",
+              "ToolTip": "C:\\com.teamseven.musik.be\\com.teamseven.musik.be\\WeatherForecast.cs",
               "RelativeToolTip": "com.teamseven.musik.be\\WeatherForecast.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-04T08:35:01.227Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-04T08:35:01.227Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "WeatherForecastController.cs",
-              "DocumentMoniker": "C:\\Users\\tritri\\source\\repos\\com.teamseven.musik.be\\com.teamseven.musik.be\\Controllers\\WeatherForecastController.cs",
+              "DocumentMoniker": "C:\\com.teamseven.musik.be\\com.teamseven.musik.be\\Controllers\\WeatherForecastController.cs",
               "RelativeDocumentMoniker": "com.teamseven.musik.be\\Controllers\\WeatherForecastController.cs",
-              "ToolTip": "C:\\Users\\tritri\\source\\repos\\com.teamseven.musik.be\\com.teamseven.musik.be\\Controllers\\WeatherForecastController.cs",
+              "ToolTip": "C:\\com.teamseven.musik.be\\com.teamseven.musik.be\\Controllers\\WeatherForecastController.cs",
               "RelativeToolTip": "com.teamseven.musik.be\\Controllers\\WeatherForecastController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-04T08:33:39.568Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-04T08:33:39.568Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
               "Title": "com.teamseven.musik.be",
-              "DocumentMoniker": "C:\\Users\\tritri\\source\\repos\\com.teamseven.musik.be\\com.teamseven.musik.be\\com.teamseven.musik.be.csproj",
+              "DocumentMoniker": "C:\\com.teamseven.musik.be\\com.teamseven.musik.be\\com.teamseven.musik.be.csproj",
               "RelativeDocumentMoniker": "com.teamseven.musik.be\\com.teamseven.musik.be.csproj",
-              "ToolTip": "C:\\Users\\tritri\\source\\repos\\com.teamseven.musik.be\\com.teamseven.musik.be\\com.teamseven.musik.be.csproj",
+              "ToolTip": "C:\\com.teamseven.musik.be\\com.teamseven.musik.be\\com.teamseven.musik.be.csproj",
               "RelativeToolTip": "com.teamseven.musik.be\\com.teamseven.musik.be.csproj",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2024-12-04T08:36:18.85Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-04T08:36:18.85Z"
             }
           ]
         },

@@ -16,7 +16,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+app.Urls.Add("http://*:80"); // Listen all address in 80 port
+
+//app.UseHttpsRedirection(); //not use https right now
 
 app.UseAuthorization();
 
