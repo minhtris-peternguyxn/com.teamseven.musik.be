@@ -16,7 +16,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.Urls.Add("http://*:80"); // Listen all address in 80 port
+// Configure the HTTP request pipeline.
+app.Urls.Add("http://0.0.0.0:80");
 
 //app.UseHttpsRedirection(); //not use https right now
 
