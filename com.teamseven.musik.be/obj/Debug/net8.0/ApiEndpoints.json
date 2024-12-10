@@ -1,6 +1,38 @@
 [
   {
-    "ContainingType": "com.teamseven.musik.be.Controllers.TestAPI",
+    "ContainingType": "com.teamseven.musik.be.Controllers.LoginController",
+    "Method": "Login",
+    "RelativePath": "api/Login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "loginRequest",
+        "Type": "com.teamseven.musik.be.Models.LoginRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "com.teamseven.musik.be.Controllers.RegisterController",
+    "Method": "Register",
+    "RelativePath": "api/Register",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "registerRequest",
+        "Type": "com.teamseven.musik.be.Models.RegisterRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "com.teamseven.musik.be.Controllers.Templates.TestAPI",
     "Method": "GetHello",
     "RelativePath": "api/TestAPI",
     "HttpMethod": "GET",
@@ -10,7 +42,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "com.teamseven.musik.be.Controllers.WeatherForecastController",
+    "ContainingType": "com.teamseven.musik.be.Controllers.Templates.WeatherForecastController",
     "Method": "Get",
     "RelativePath": "WeatherForecast",
     "HttpMethod": "GET",
@@ -19,7 +51,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[com.teamseven.musik.be.WeatherForecast, com.teamseven.musik.be, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[com.teamseven.musik.be.Controllers.Templates.WeatherForecast, com.teamseven.musik.be, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",

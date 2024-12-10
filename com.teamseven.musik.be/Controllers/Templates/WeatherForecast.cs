@@ -1,4 +1,4 @@
-namespace com.teamseven.musik.be
+namespace com.teamseven.musik.be.Controllers.Templates
 {
     public class WeatherForecast
     {

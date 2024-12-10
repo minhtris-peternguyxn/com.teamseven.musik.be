@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace com.teamseven.musik.be.Controllers
+namespace com.teamseven.musik.be.Controllers.Templates
 {
     [ApiController]
     [Route("api/[controller]")]
