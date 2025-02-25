@@ -1,4 +1,6 @@
-﻿using com.teamseven.musik.be.Entities;
+﻿using com.teamseven.musik.be.Models.Contexts;
+using com.teamseven.musik.be.Models.Entities;
+using com.teamseven.musik.be.Repositories.interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;

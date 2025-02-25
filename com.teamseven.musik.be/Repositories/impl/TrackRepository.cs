@@ -1,0 +1,90 @@
+﻿using com.teamseven.musik.be.Models.Contexts;
+using com.teamseven.musik.be.Models.Entities;
+using com.teamseven.musik.be.Repositories.interfaces;
+using Microsoft.EntityFrameworkCore;
+
+namespace com.teamseven.musik.be.Repositories.impl
+{
+    public class TrackRepository : ITrackRepository
+    {
+        private readonly MusikDbContext _context;
+
+        public TrackRepository(MusikDbContext context)
+        {
+            _context = context;
+        }
+
+
+        public async Task AddTrackAsync(Track track)
+        {
+            //add missing information
+            track.CreatedDate = DateTime.Now;
+            track.TotalLikes = 0;
+            track.TotalViews = 0;
+
+
+            _context.Tracks.Add(track);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task DeleteTrackAsync(int id)
+        {
+            var track = await _context.Tracks.FindAsync(id);
+            if (track != null)
+            {
+                _context.Tracks.Remove(track);
+                await _context.SaveChangesAsync();
+            }
+        }
+
+        public async Task<IEnumerable<Track>> GetAllTracksAsync()
+        {
+           return await _context.Tracks.ToListAsync();
+        }
+
+        public async Task<Track> GetByIdAsync(int id) => await _context.Tracks.FindAsync(id);
+
+        public async Task<IEnumerable<Track>> ListTrackByAlbum(int albumId)
+        {
+            return await _context.Tracks
+                .Where(t => t.AlbumId == albumId)
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<Track>> ListTrackByArtist(int artist)
+        {
+            return await _context.Tracks
+                  .Where(t => t.ArtistId == artist)
+                  .ToListAsync();
+        }
+
+        public async Task<IEnumerable<Track>> ListTrackByGenere(int genere)
+        {
+            return await _context.Tracks
+                 .Where(t => t.GenreId == genere)
+                 .ToListAsync();
+        }
+
+        public async Task<IEnumerable<Track>> ListTrackLast7Days()
+        {
+            var sevenDaysAgo = DateTime.Now.AddDays(-7);
+
+            return await _context.Tracks
+                .Where(t => t.CreatedDate >= sevenDaysAgo)
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<Track>> ListTracksByIdsAsync(List<int> ids)
+        {
+            return await _context.Tracks
+        .Where(t => ids.Contains(t.TrackId))
+        .ToListAsync();
+        }
+
+        public async Task UpdateTrackAsync(Track track)
+        {
+            _context.Tracks.Update(track);
+            await _context.SaveChangesAsync();
+        }
+    }
+}
