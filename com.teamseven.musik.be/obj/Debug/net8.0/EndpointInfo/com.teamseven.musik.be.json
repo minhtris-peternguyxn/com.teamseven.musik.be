@@ -237,26 +237,36 @@
         }
       }
     },
-    "/api/Login": {
+    "/api/genre": {
+      "get": {
+        "tags": [
+          "Genre"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
       "post": {
         "tags": [
-          "Login"
+          "Genre"
         ],
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/LoginRequest"
+                "$ref": "#/components/schemas/GenreDataTransfer"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/LoginRequest"
+                "$ref": "#/components/schemas/GenreDataTransfer"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/LoginRequest"
+                "$ref": "#/components/schemas/GenreDataTransfer"
               }
             }
           }
@@ -268,30 +278,43 @@
         }
       }
     },
-    "/api/Register": {
-      "post": {
+    "/api/genre/{id}": {
+      "get": {
         "tags": [
-          "Register"
+          "Genre"
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/RegisterRequest"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/RegisterRequest"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/RegisterRequest"
-              }
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
             }
           }
-        },
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Genre"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -320,17 +343,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/TrackMusicRequest"
+                "$ref": "#/components/schemas/TrackDataTransfer"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/TrackMusicRequest"
+                "$ref": "#/components/schemas/TrackDataTransfer"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/TrackMusicRequest"
+                "$ref": "#/components/schemas/TrackDataTransfer"
               }
             }
           }
@@ -359,17 +382,60 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/TrackMusicRequest"
+                "$ref": "#/components/schemas/TrackDataTransfer"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/TrackMusicRequest"
+                "$ref": "#/components/schemas/TrackDataTransfer"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/TrackMusicRequest"
+                "$ref": "#/components/schemas/TrackDataTransfer"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/track/get-tracks-by-ids": {
+      "post": {
+        "tags": [
+          "Track"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "format": "int32"
+                }
               }
             }
           }
@@ -506,6 +572,128 @@
         }
       }
     },
+    "/api/track/add-track-to-album": {
+      "post": {
+        "tags": [
+          "Track"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TrackAlbum"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TrackAlbum"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TrackAlbum"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/track/add-track-to-genre": {
+      "post": {
+        "tags": [
+          "Track"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TrackGenre"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TrackGenre"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TrackGenre"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/track/remove-track-from-album": {
+      "post": {
+        "tags": [
+          "Track"
+        ],
+        "parameters": [
+          {
+            "name": "trackId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "albumId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/track/remove-track-from-genre": {
+      "post": {
+        "tags": [
+          "Track"
+        ],
+        "parameters": [
+          {
+            "name": "trackId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "genreId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/upload_convert_mp3": {
       "post": {
         "tags": [
@@ -603,79 +791,11 @@
           "img": {
             "type": "string",
             "nullable": true
-          },
-          "artistId": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "artist": {
-            "$ref": "#/components/schemas/Artist"
-          },
-          "tracks": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Track"
-            },
-            "nullable": true
           }
         },
         "additionalProperties": false
       },
-      "Artist": {
-        "type": "object",
-        "properties": {
-          "artistId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "artistName": {
-            "type": "string",
-            "nullable": true
-          },
-          "verifiedArtist": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "subscribeNumber": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "createdDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "img": {
-            "type": "string",
-            "nullable": true
-          },
-          "albums": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Album"
-            },
-            "nullable": true
-          },
-          "podcasts": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Podcast"
-            },
-            "nullable": true
-          },
-          "tracks": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Track"
-            },
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "Genre": {
+      "GenreDataTransfer": {
         "type": "object",
         "properties": {
           "genreId": {
@@ -693,20 +813,6 @@
           "img": {
             "type": "string",
             "nullable": true
-          },
-          "histories": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/History"
-            },
-            "nullable": true
-          },
-          "tracks": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Track"
-            },
-            "nullable": true
           }
         },
         "additionalProperties": false
@@ -715,164 +821,6 @@
         "type": "object",
         "properties": {
           "credential": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "History": {
-        "type": "object",
-        "properties": {
-          "historyId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "trackId": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "userId": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "lastPlayed": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "createdDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "genreId": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "genre": {
-            "$ref": "#/components/schemas/Genre"
-          }
-        },
-        "additionalProperties": false
-      },
-      "LoginRequest": {
-        "type": "object",
-        "properties": {
-          "email": {
-            "type": "string",
-            "nullable": true
-          },
-          "password": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "Playlist": {
-        "type": "object",
-        "properties": {
-          "playlistId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "playlistName": {
-            "type": "string",
-            "nullable": true
-          },
-          "userId": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "createdDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "podcasts": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Podcast"
-            },
-            "nullable": true
-          },
-          "user": {
-            "$ref": "#/components/schemas/User"
-          }
-        },
-        "additionalProperties": false
-      },
-      "Podcast": {
-        "type": "object",
-        "properties": {
-          "podcastId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "artistId": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "playlistId": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "podcastTitle": {
-            "type": "string",
-            "nullable": true
-          },
-          "podcastDetail": {
-            "type": "string",
-            "nullable": true
-          },
-          "duration": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "releaseDate": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "createdDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "img": {
-            "type": "string",
-            "nullable": true
-          },
-          "artist": {
-            "$ref": "#/components/schemas/Artist"
-          },
-          "playlist": {
-            "$ref": "#/components/schemas/Playlist"
-          }
-        },
-        "additionalProperties": false
-      },
-      "RegisterRequest": {
-        "type": "object",
-        "properties": {
-          "email": {
-            "type": "string",
-            "nullable": true
-          },
-          "password": {
-            "type": "string",
-            "nullable": true
-          },
-          "name": {
-            "type": "string",
-            "nullable": true
-          },
-          "address": {
             "type": "string",
             "nullable": true
           }
@@ -911,7 +859,21 @@
         },
         "additionalProperties": false
       },
-      "Track": {
+      "TrackAlbum": {
+        "type": "object",
+        "properties": {
+          "trackId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "albumId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "TrackDataTransfer": {
         "type": "object",
         "properties": {
           "trackId": {
@@ -922,67 +884,6 @@
             "type": "string",
             "nullable": true
           },
-          "duration": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "artistId": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "albumId": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "genreId": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "createdDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "img": {
-            "type": "string",
-            "nullable": true
-          },
-          "totalViews": {
-            "type": "integer",
-            "format": "int64",
-            "nullable": true
-          },
-          "totalLikes": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "trackBlobsLink": {
-            "type": "string",
-            "nullable": true
-          },
-          "album": {
-            "$ref": "#/components/schemas/Album"
-          },
-          "artist": {
-            "$ref": "#/components/schemas/Artist"
-          },
-          "genre": {
-            "$ref": "#/components/schemas/Genre"
-          }
-        },
-        "additionalProperties": false
-      },
-      "TrackMusicRequest": {
-        "type": "object",
-        "properties": {
-          "trackName": {
-            "type": "string",
-            "nullable": true
-          },
           "trackBlobsLink": {
             "type": "string",
             "nullable": true
@@ -992,19 +893,28 @@
             "format": "int32",
             "nullable": true
           },
-          "artistId": {
-            "type": "integer",
-            "format": "int32",
+          "artistIds": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
             "nullable": true
           },
-          "albumId": {
-            "type": "integer",
-            "format": "int32",
+          "genreIds": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
             "nullable": true
           },
-          "genreId": {
-            "type": "integer",
-            "format": "int32",
+          "albumIds": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
             "nullable": true
           },
           "img": {
@@ -1014,60 +924,16 @@
         },
         "additionalProperties": false
       },
-      "User": {
+      "TrackGenre": {
         "type": "object",
         "properties": {
-          "userId": {
+          "trackId": {
             "type": "integer",
             "format": "int32"
           },
-          "name": {
-            "type": "string",
-            "nullable": true
-          },
-          "email": {
-            "type": "string",
-            "nullable": true
-          },
-          "password": {
-            "type": "string",
-            "nullable": true
-          },
-          "role": {
-            "type": "string",
-            "nullable": true
-          },
-          "phoneNumber": {
-            "type": "string",
-            "nullable": true
-          },
-          "address": {
-            "type": "string",
-            "nullable": true
-          },
-          "createdAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "accountType": {
-            "type": "string",
-            "nullable": true
-          },
-          "imgLink": {
-            "type": "string",
-            "nullable": true
-          },
-          "numberOfSubscriber": {
+          "genreId": {
             "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "playlists": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Playlist"
-            },
-            "nullable": true
+            "format": "int32"
           }
         },
         "additionalProperties": false

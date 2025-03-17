@@ -6,3 +6,8 @@
 *.cache
 *.cache
 *.json
+*.json
+/com.teamseven.musik.be/appsettings.json
+com.teamseven.musik.be/appsettings.json
+com.teamseven.musik.be/bin/Debug/net8.0/appsettings.json
+com.teamseven.musik.be/bin/Debug/net8.0/appsettings.json

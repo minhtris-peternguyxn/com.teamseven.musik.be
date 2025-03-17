@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
 using com.teamseven.musik.be.Models.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace com.teamseven.musik.be.Models.Contexts;
 
@@ -18,20 +18,29 @@ public partial class MusikDbContext : DbContext
 
     public virtual DbSet<Album> Albums { get; set; }
 
+    public virtual DbSet<AlbumArtist> AlbumArtists { get; set; }
+
     public virtual DbSet<Artist> Artists { get; set; }
 
-    public virtual DbSet<Genre> Genre { get; set; }
+    public virtual DbSet<Genre> Genres { get; set; }
 
     public virtual DbSet<History> Histories { get; set; }
 
     public virtual DbSet<Playlist> Playlists { get; set; }
 
+    public virtual DbSet<PlaylistTrack> PlaylistTracks { get; set; }
+
     public virtual DbSet<Podcast> Podcasts { get; set; }
 
     public virtual DbSet<Track> Tracks { get; set; }
 
-    public virtual DbSet<User> Users { get; set; }
+    public virtual DbSet<TrackAlbum> TrackAlbums { get; set; }
 
+    public virtual DbSet<TrackArtist> TrackArtists { get; set; }
+
+    public virtual DbSet<TrackGenre> TrackGenres { get; set; }
+
+    public virtual DbSet<User> Users { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -46,7 +55,6 @@ public partial class MusikDbContext : DbContext
                 .HasMaxLength(255)
                 .IsUnicode(false)
                 .HasColumnName("album_name");
-            entity.Property(e => e.ArtistId).HasColumnName("artist_id");
             entity.Property(e => e.CreatedDate)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime")
@@ -58,10 +66,18 @@ public partial class MusikDbContext : DbContext
             entity.Property(e => e.ReleaseDate)
                 .HasColumnType("datetime")
                 .HasColumnName("release_date");
+        });
 
-            entity.HasOne(d => d.Artist).WithMany(p => p.Albums)
-                .HasForeignKey(d => d.ArtistId)
-                .HasConstraintName("FK_Album_Artist");
+        modelBuilder.Entity<AlbumArtist>(entity =>
+        {
+            entity.HasKey(e => e.AlbumId);
+
+            entity.ToTable("AlbumArtist");
+
+            entity.Property(e => e.AlbumId)
+                .ValueGeneratedNever()
+                .HasColumnName("album_id");
+            entity.Property(e => e.ArtistId).HasColumnName("artist_id");
         });
 
         modelBuilder.Entity<Artist>(entity =>
@@ -153,6 +169,16 @@ public partial class MusikDbContext : DbContext
                 .HasConstraintName("FK__Playlist__user_i__4F7CD00D");
         });
 
+        modelBuilder.Entity<PlaylistTrack>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("PlaylistTrack");
+
+            entity.Property(e => e.PlaylistId).HasColumnName("playlist_id");
+            entity.Property(e => e.TrackId).HasColumnName("track_id");
+        });
+
         modelBuilder.Entity<Podcast>(entity =>
         {
             entity.HasKey(e => e.PodcastId).HasName("PK__Podcast__147CC0429BD514C6");
@@ -199,14 +225,11 @@ public partial class MusikDbContext : DbContext
             entity.ToTable("Track");
 
             entity.Property(e => e.TrackId).HasColumnName("track_id");
-            entity.Property(e => e.AlbumId).HasColumnName("album_id");
-            entity.Property(e => e.ArtistId).HasColumnName("artist_id");
             entity.Property(e => e.CreatedDate)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime")
                 .HasColumnName("created_date");
             entity.Property(e => e.Duration).HasColumnName("duration");
-            entity.Property(e => e.GenreId).HasColumnName("genre_id");
             entity.Property(e => e.Img)
                 .HasMaxLength(255)
                 .IsUnicode(false)
@@ -221,18 +244,40 @@ public partial class MusikDbContext : DbContext
                 .HasMaxLength(255)
                 .IsUnicode(false)
                 .HasColumnName("track_name");
+        });
 
-            entity.HasOne(d => d.Album).WithMany(p => p.Tracks)
-                .HasForeignKey(d => d.AlbumId)
-                .HasConstraintName("FK__Track__album_id__52593CB8");
+        modelBuilder.Entity<TrackAlbum>(entity =>
+        {
+            entity.HasKey(e => e.TrackId);
 
-            entity.HasOne(d => d.Artist).WithMany(p => p.Tracks)
-                .HasForeignKey(d => d.ArtistId)
-                .HasConstraintName("FK__Track__artist_id__534D60F1");
+            entity.ToTable("TrackAlbum");
 
-            entity.HasOne(d => d.Genre).WithMany(p => p.Tracks)
-                .HasForeignKey(d => d.GenreId)
-                .HasConstraintName("FK__Track__genre_id__5441852A");
+            entity.Property(e => e.TrackId)
+                .ValueGeneratedNever()
+                .HasColumnName("track_id");
+            entity.Property(e => e.AlbumId).HasColumnName("album_id");
+        });
+
+        modelBuilder.Entity<TrackArtist>(entity =>
+        {
+            entity.HasKey(e => e.TrackId);
+
+            entity.ToTable("TrackArtist");
+
+            entity.Property(e => e.TrackId)
+                .ValueGeneratedNever()
+                .HasColumnName("track_id");
+            entity.Property(e => e.ArtistId).HasColumnName("artist_id");
+        });
+
+        modelBuilder.Entity<TrackGenre>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("TrackGenre");
+
+            entity.Property(e => e.GenreId).HasColumnName("genre_id");
+            entity.Property(e => e.TrackId).HasColumnName("track_id");
         });
 
         modelBuilder.Entity<User>(entity =>

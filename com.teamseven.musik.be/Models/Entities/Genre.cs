@@ -14,6 +14,4 @@ public partial class Genre
     public string? Img { get; set; }
 
     public virtual ICollection<History> Histories { get; set; } = new List<History>();
-
-    public virtual ICollection<Track> Tracks { get; set; } = new List<Track>();
 }

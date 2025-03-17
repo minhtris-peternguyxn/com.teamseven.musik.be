@@ -14,10 +14,4 @@ public partial class Album
     public DateTime CreatedDate { get; set; }
 
     public string? Img { get; set; }
-
-    public int? ArtistId { get; set; }
-
-    public virtual Artist? Artist { get; set; }
-
-    public virtual ICollection<Track> Tracks { get; set; } = new List<Track>();
 }

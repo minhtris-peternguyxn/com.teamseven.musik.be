@@ -17,9 +17,5 @@ public partial class Artist
 
     public string? Img { get; set; }
 
-    public virtual ICollection<Album> Albums { get; set; } = new List<Album>();
-
     public virtual ICollection<Podcast> Podcasts { get; set; } = new List<Podcast>();
-
-    public virtual ICollection<Track> Tracks { get; set; } = new List<Track>();
 }

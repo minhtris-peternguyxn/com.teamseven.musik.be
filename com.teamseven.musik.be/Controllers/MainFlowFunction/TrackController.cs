@@ -1,5 +1,6 @@
 ﻿using com.teamseven.musik.be.Models.Entities;
 using com.teamseven.musik.be.Models.Request;
+using com.teamseven.musik.be.Services.Authentication;
 using com.teamseven.musik.be.Services.QueryDB;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -13,48 +14,29 @@ namespace com.teamseven.musik.be.Controllers.MainFlowFunction
     public class TrackController : ControllerBase
     {
         private readonly TrackService _trackService;
+        private readonly AuthService _authService;
 
-        public TrackController(TrackService trackService)
+        public TrackController(TrackService trackService, AuthService authService)
         {
             _trackService = trackService;
+
         }
 
         // CREATE
         [HttpPost]
-        public async Task<IActionResult> AddTrack([FromBody] TrackMusicRequest track)
+        public async Task<IActionResult> AddTrack([FromBody] TrackDataTransfer track)
         {
             if (track == null)
             {
                 return BadRequest("Track information cannot be null.");
             }
 
-            Console.WriteLine("Create track...");
+            //Console.WriteLine("Create track...");
 
-            if (!Request.Headers.TryGetValue("Authorization", out var authHeader) ||
-                string.IsNullOrWhiteSpace(authHeader) ||
-                !authHeader.ToString().StartsWith("Bearer "))
+            var authorizationResult = _authService.ValidateAuthorizationHeader(Request.Headers);
+            if (authorizationResult != null)
             {
-                return Unauthorized(new { message = "Missing or invalid Authorization header." });
-            }
-
-            var tokenString = authHeader.ToString().Substring("Bearer ".Length).Trim();
-            var tokenHandler = new JwtSecurityTokenHandler();
-            JwtSecurityToken token;
-
-            try
-            {
-                token = tokenHandler.ReadJwtToken(tokenString);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new { message = $"Invalid token: {ex.Message}" });
-            }
-
-            var userRole = token.Claims.FirstOrDefault(c => c.Type == "role")?.Value?.ToLower();
-
-            if (userRole != "admin")
-            {
-                return Forbid();
+                return authorizationResult;
             }
 
             try
@@ -143,10 +125,14 @@ namespace com.teamseven.musik.be.Controllers.MainFlowFunction
 
         // UPDATE
         [HttpPut]
-        public async Task<IActionResult> UpdateTrack([FromBody] TrackMusicRequest track)
+        public async Task<IActionResult> UpdateTrack([FromBody] TrackDataTransfer track)
         {
-            var userRole = User.FindFirstValue(ClaimTypes.Role);
-            await _trackService.UpdateTrackAsync(_trackService.ConvertToTrackEntity(track), userRole);
+            var authorizationResult = _authService.ValidateAuthorizationHeader(Request.Headers);
+            if (authorizationResult != null)
+            {
+                return authorizationResult;
+            }
+            await _trackService.UpdateTrackAsync(track);
             return Ok("Track updated successfully.");
         }
 
@@ -154,9 +140,63 @@ namespace com.teamseven.musik.be.Controllers.MainFlowFunction
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteTrack(int id)
         {
-            var userRole = User.FindFirstValue(ClaimTypes.Role);
-            await _trackService.DeleteTrackAsync(id, userRole);
+            var authorizationResult = _authService.ValidateAuthorizationHeader(Request.Headers);
+            if (authorizationResult != null)
+            {
+                return authorizationResult;
+            }
+
+            await _trackService.DeleteTrackAsync(id, "admin");
             return Ok("Track deleted successfully.");
         }
+
+        [HttpPost("add-track-to-album")]
+        public async Task<IActionResult> AddTrackToAlbum(TrackAlbum trackAlbum)
+        {
+            var authorizationResult = _authService.ValidateAuthorizationHeader(Request.Headers);
+            if (authorizationResult != null)
+            {
+                return authorizationResult;
+            }
+            await _trackService.AddTrackToAlbumAsync(trackAlbum);
+            return Ok("Add successfully");
+        }
+
+        [HttpPost("add-track-to-genre")]
+        public async Task<IActionResult> AddTrackToGenre(TrackGenre trackGenre)
+        {
+            var authorizationResult = _authService.ValidateAuthorizationHeader(Request.Headers);
+            if (authorizationResult != null)
+            {
+                return authorizationResult;
+            }
+            await _trackService.AddTrackToGenreAsync(trackGenre);
+            return Ok("Add to genre successfully");
+        }
+
+        [HttpPost("remove-track-from-album")]
+        public async Task<IActionResult> RemoveTrackFromAlbum(int trackId, int albumId)
+        {
+            var authorizationResult = _authService.ValidateAuthorizationHeader(Request.Headers);
+            if (authorizationResult != null)
+            {
+                return authorizationResult;
+            }
+            await _trackService.RemoveTrackFromAlbumAsync(trackId, albumId);
+            return Ok("Removed from album successfully");
+        }
+
+        [HttpPost("remove-track-from-genre")]
+        public async Task<IActionResult> RemoveTrackFromGenre(int trackId, int genreId)
+        {
+            var authorizationResult = _authService.ValidateAuthorizationHeader(Request.Headers);
+            if (authorizationResult != null)
+            {
+                return authorizationResult;
+            }
+            await _trackService.RemoveTrackFromGenreAsync(trackId, genreId);
+            return Ok("Removed from genre successfully");
+        }
+
     }
 }

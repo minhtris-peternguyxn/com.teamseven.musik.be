@@ -7,10 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Models\RequestDTO\TrackMusicRequest\**" />
-    <Content Remove="Models\RequestDTO\TrackMusicRequest\**" />
-    <EmbeddedResource Remove="Models\RequestDTO\TrackMusicRequest\**" />
-    <None Remove="Models\RequestDTO\TrackMusicRequest\**" />
+    <Compile Remove="Models\DataTranfers\TrackMusicRequest\**" />
+    <Content Remove="Models\DataTranfers\TrackMusicRequest\**" />
+    <EmbeddedResource Remove="Models\DataTranfers\TrackMusicRequest\**" />
+    <None Remove="Models\DataTranfers\TrackMusicRequest\**" />
   </ItemGroup>
 
   <ItemGroup>

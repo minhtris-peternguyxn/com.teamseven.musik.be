@@ -16,11 +16,11 @@ namespace com.teamseven.musik.be.Controllers.AuthenticationFunction.ExternalLogi
     public class ExternalLoginController : ControllerBase
     {
         private readonly IUserRepository _userRepository;
-        private readonly TokenService _tokenService;
+        private readonly AuthService _tokenService;
         private readonly RegisterService _registerService;
         private readonly IConfiguration _configuration;
 
-        public ExternalLoginController(IUserRepository userRepository, TokenService tokenService, RegisterService registerService, IConfiguration configuration)
+        public ExternalLoginController(IUserRepository userRepository, AuthService tokenService, RegisterService registerService, IConfiguration configuration)
         {
             _userRepository = userRepository;
             _registerService = registerService;

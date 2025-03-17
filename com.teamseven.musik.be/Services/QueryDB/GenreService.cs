@@ -2,6 +2,8 @@
 using com.teamseven.musik.be.Models.Entities;
 using com.teamseven.musik.be.Models.RequestDTO;
 using com.teamseven.musik.be.Repositories.interfaces;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace com.teamseven.musik.be.Services.QueryDB
 {
@@ -26,7 +28,6 @@ namespace com.teamseven.musik.be.Services.QueryDB
             return _mapper.Map<GenreDataTransfer>(genre);
         }
 
-
         public async Task AddGenreAsync(GenreDataTransfer genre)
         {
             // Check if genre exists
@@ -41,9 +42,19 @@ namespace com.teamseven.musik.be.Services.QueryDB
             await _repo.AddGenreAsync(genreEntity);
         }
 
-        public async Task ListAllGenre()
+        public async Task<IEnumerable<Genre>> ListAllGenre()
         {
-            await _repo.GetAllGenreAsync();
+            return await _repo.GetAllGenreAsync();
+        }
+
+        public async Task<Genre> GetOneGenre(int id)
+        {
+            return await _repo.GetGenreAsync(id);
+        }
+
+        public async Task RemoveGenre(int id)
+        {
+            await _repo.DeleteGenreAsync(id);
         }
     }
 }

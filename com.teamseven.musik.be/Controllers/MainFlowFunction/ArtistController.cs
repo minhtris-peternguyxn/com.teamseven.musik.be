@@ -1,9 +1,9 @@
 ﻿using com.teamseven.musik.be.Models.RequestDTO;
 using com.teamseven.musik.be.Repositories.interfaces;
+using com.teamseven.musik.be.Services.Authentication;
 using com.teamseven.musik.be.Services.QueryDB;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.IdentityModel.Tokens.Jwt;
 
 namespace com.teamseven.musik.be.Controllers.MainFlowFunction
 {
@@ -13,46 +13,20 @@ namespace com.teamseven.musik.be.Controllers.MainFlowFunction
     {
         private readonly SingerService _singService;
         private readonly IArtistRepository _repo;
-
         public ArtistController(IArtistRepository repo, SingerService singService)
         {
+
             _repo = repo;
             _singService = singService;
         }
 
         [HttpPost]
+        [Authorize(Policy = "SaleStaffPolicy")] //staff role to access
         public async Task<IActionResult> AddArtist([FromBody] SingerInfoDataTransfer artist)
         {
             if (artist == null)
             {
                 return BadRequest("Artist cannot be null.");
-            }
-
-            if (!Request.Headers.TryGetValue("Authorization", out var authHeader) ||
-                string.IsNullOrWhiteSpace(authHeader) ||
-                !authHeader.ToString().StartsWith("Bearer "))
-            {
-                return Unauthorized(new { message = "Missing or invalid Authorization header." });
-            }
-
-            var tokenString = authHeader.ToString().Substring("Bearer ".Length).Trim();
-            var tokenHandler = new JwtSecurityTokenHandler();
-            JwtSecurityToken token;
-
-            try
-            {
-                token = tokenHandler.ReadJwtToken(tokenString);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new { message = $"Invalid token: {ex.Message}" });
-            }
-
-            var userRole = token.Claims.FirstOrDefault(c => c.Type == "role")?.Value?.ToLower();
-
-            if (userRole != "admin")
-            {
-                return Forbid();
             }
 
             try

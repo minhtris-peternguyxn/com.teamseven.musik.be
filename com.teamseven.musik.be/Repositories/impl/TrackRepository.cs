@@ -1,4 +1,5 @@
-﻿using com.teamseven.musik.be.Models.Contexts;
+﻿//using com.teamseven.musik.be.Models.Contexts;
+using com.teamseven.musik.be.Models.Contexts;
 using com.teamseven.musik.be.Models.Entities;
 using com.teamseven.musik.be.Repositories.interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -39,28 +40,28 @@ namespace com.teamseven.musik.be.Repositories.impl
 
         public async Task<IEnumerable<Track>> GetAllTracksAsync()
         {
-           return await _context.Tracks.ToListAsync();
+            return await _context.Tracks.ToListAsync();
         }
 
         public async Task<Track> GetByIdAsync(int id) => await _context.Tracks.FindAsync(id);
 
-        public async Task<IEnumerable<Track>> ListTrackByAlbum(int albumId)
+        public async Task<IEnumerable<TrackAlbum>> ListTrackByAlbum(int albumId)
         {
-            return await _context.Tracks
+            return await _context.TrackAlbums
                 .Where(t => t.AlbumId == albumId)
                 .ToListAsync();
         }
 
-        public async Task<IEnumerable<Track>> ListTrackByArtist(int artist)
+        public async Task<IEnumerable<TrackArtist>> ListTrackByArtist(int artist)
         {
-            return await _context.Tracks
+            return await _context.TrackArtists
                   .Where(t => t.ArtistId == artist)
                   .ToListAsync();
         }
 
-        public async Task<IEnumerable<Track>> ListTrackByGenere(int genere)
+        public async Task<IEnumerable<TrackGenre>> ListTrackByGenere(int genere)
         {
-            return await _context.Tracks
+            return await _context.TrackGenres
                  .Where(t => t.GenreId == genere)
                  .ToListAsync();
         }

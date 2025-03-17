@@ -1,5 +1,8 @@
-﻿using com.teamseven.musik.be.Models.Entities;
+﻿using com.teamseven.musik.be.Models.DataTranfers.Album;
+using com.teamseven.musik.be.Models.Entities;
 using com.teamseven.musik.be.Repositories.interfaces;
+using com.teamseven.musik.be.Services;
+using com.teamseven.musik.be.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -10,74 +13,86 @@ namespace com.teamseven.musik.be.Controllers.MainFlowFunction
     [Route("api/albums")]
     public class AlbumController : ControllerBase
     {
-        private readonly IAlbumRepository _albumRepository;
+        private readonly IAlbumService _albumService;
 
-        public AlbumController(IAlbumRepository albumRepository)
+        public AlbumController(IAlbumService albumService)
         {
-            _albumRepository = albumRepository;
+            _albumService = albumService;
         }
 
+        //GET: GET ALL ALBUMS
         [HttpGet]
         [AllowAnonymous]
         public async Task<IActionResult> GetAllAlbums()
         {
-            var albums = await _albumRepository.GetAllAlbumsAsync();
+            var albums = await _albumService.GetAllAlbumsAsync();
             return albums != null ? Ok(albums) : NotFound(new { message = "No albums found." });
         }
-
+        //GET: GET ALBUMS BY ID
         [HttpGet("{id:int}")]
         [AllowAnonymous]
         public async Task<IActionResult> GetAlbumById(int id)
         {
-            var album = await _albumRepository.GetAlbumByIdAsync(id);
+            var album = await _albumService.GetAlbumByIdAsync(id);
             return album != null ? Ok(album) : NotFound(new { message = "Album not found." });
         }
 
+        //GET: GET ALBUMS BY NAME
+        [HttpGet("{name:string}")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetAlbumByName(string name)
+        {
+            var albums = await _albumService.GetAlbumByNameAsync(name);
+            return albums != null ? Ok(albums) : NotFound(new { message = "Album not found." });
+        }
+
         [HttpPost]
-        public async Task<IActionResult> CreateAlbum([FromBody] Album album)
+        [Authorize(Policy = "SaleStaffPolicy")]
+        public async Task<IActionResult> CreateAlbum([FromBody] AlbumRequest album)
         {
             if (album == null)
             {
                 return BadRequest(new { message = "Invalid album data." });
             }
 
-            album.CreatedDate = DateTime.Now;
-            await _albumRepository.AddAlbumAsync(album);
-            return CreatedAtAction(nameof(GetAlbumById), new { id = album.AlbumId }, album);
+            try
+            {
+                await _albumService.CreateNewAlbum(album);
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
 
         [HttpPut("{id:int}")]
-        public async Task<IActionResult> UpdateAlbum(int id, [FromBody] Album album)
+        [Authorize(Policy = "SaleStaffPolicy")]
+        public async Task<IActionResult> UpdateAlbum([FromBody] Album album)
         {
-            if (id != album.AlbumId)
+            try
             {
-                return BadRequest(new { message = "Album ID mismatch." });
+                await _albumService.UpdateAlbum(album); return NoContent();
             }
-
-            var existingAlbum = await _albumRepository.GetAlbumByIdAsync(id);
-            if (existingAlbum == null)
+            catch (Exception ex)
             {
-                return NotFound(new { message = "Album not found." });
+                return StatusCode(500, ex.Message);
             }
-
-            existingAlbum.AlbumName = album.AlbumName;
-            existingAlbum.ReleaseDate = album.ReleaseDate;
-            await _albumRepository.UpdateAlbumAsync(existingAlbum);
-
-            return NoContent();
         }
 
         [HttpDelete("{id:int}")]
+        [Authorize(Policy = "SaleStaffPolicy")]
         public async Task<IActionResult> DeleteAlbum(int id)
         {
-            var album = await _albumRepository.GetAlbumByIdAsync(id);
-            if (album == null)
+            try
             {
-                return NotFound(new { message = "Album not found." });
+                await _albumService.DeleteAlbum(id);
+                return NoContent();
             }
-
-            await _albumRepository.DeleteAlbumAsync(id);
-            return NoContent();
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
     }
 }

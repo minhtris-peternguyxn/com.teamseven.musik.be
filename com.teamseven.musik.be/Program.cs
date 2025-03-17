@@ -1,57 +1,57 @@
 ﻿using System.Reflection;
 using System.Text;
 using Azure.Storage.Blobs;
-using com.teamseven.musik.be.Repositories.interfaces;
-using com.teamseven.musik.be.Repositories.impl;
-using com.teamseven.musik.be.Services.Authentication;
-using com.teamseven.musik.be.Services.QueryDB;
 using com.teamseven.musik.be.Extensions;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication;
+using com.teamseven.musik.be.Models.Contexts;
+using Microsoft.Extensions.Configuration;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// ========== CẤU HÌNH DATABASE ==========
-builder.Services.AddDbContext<com.teamseven.musik.be.Models.Contexts.MusikDbContext>(options =>
+// ================= CẤU HÌNH DB =================
+builder.Services.AddDbContext<MusikDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// ========== CẤU HÌNH AUTHENTICATION ==========
+// ================= CẤU HÌNH AUTHENTICATION =================
 ConfigureAuthentication(builder.Services, builder.Configuration);
 
-// ========== ĐĂNG KÝ REPOSITORY & SERVICE ==========
+// ================= ĐĂNG KÝ REPOSITORY & SERVICE =================
 builder.Services.AddRepositories(Assembly.GetExecutingAssembly());
 builder.Services.AddServices(Assembly.GetExecutingAssembly());
 
-// ========== CẤU HÌNH BLOB STORAGE ==========
+// ================= CẤU HÌNH BLOB STORAGE =================
 var blobServiceClient = new BlobServiceClient(builder.Configuration["AzureStorage:ConnectionString"]);
 builder.Services.AddSingleton(blobServiceClient);
 
-// ========== CẤU HÌNH CORS ==========
+// ================= CẤU HÌNH CORS =================
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll", policy =>
     {
-        policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+        policy.AllowAnyOrigin()
+              .AllowAnyMethod()
+              .AllowAnyHeader();
     });
 });
 
-// ========== CẤU HÌNH SWAGGER ==========
+// ================= CẤU HÌNH SWAGGER =================
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// ========== CẤU HÌNH AUTOMAPPER ==========
+// ================= CẤU HÌNH AUTOMAPPER =================
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-// ========== CẤU HÌNH CONTROLLERS ==========
+// ================= CẤU HÌNH CONTROLLERS =================
 builder.Services.AddControllers();
 
 var app = builder.Build();
 
-// ========== MIDDLEWARE ==========
+// ================= MIDDLEWARE =================
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -62,12 +62,12 @@ app.UseCors("AllowAll");
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
-
 app.Run();
 
-// ========== HÀM CẤU HÌNH AUTHENTICATION ==========
+// ================= HÀM CẤU HÌNH AUTHENTICATION =================
 void ConfigureAuthentication(IServiceCollection services, IConfiguration config)
 {
+    // JWT Authentication
     services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         .AddJwtBearer(options =>
         {
@@ -75,12 +75,19 @@ void ConfigureAuthentication(IServiceCollection services, IConfiguration config)
             {
                 ValidateIssuer = false,
                 ValidateAudience = false,
-                ValidateLifetime = false, // Không cần Lifetime cho App nghe nhạc
+                ValidateLifetime = false, // Không yêu cầu xác thực Lifetime cho app nghe nhạc
                 ValidateIssuerSigningKey = true,
                 IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("cr7-is-the-goat"))
             };
         });
+    // Add Authorization policies
+    builder.Services.AddAuthorization(options =>
+    {
+        options.AddPolicy("DeliveringStaffPolicy", policy => policy.RequireClaim("role", "Admin"));
+        options.AddPolicy("SaleStaffPolicy", policy => policy.RequireClaim("role", "Staff"));
+    });
 
+    // Google Authentication
     services.AddAuthentication(options =>
     {
         options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;

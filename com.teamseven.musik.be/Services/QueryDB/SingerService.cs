@@ -6,7 +6,7 @@ using com.teamseven.musik.be.Repositories.interfaces;
 
 namespace com.teamseven.musik.be.Services.QueryDB
 {
-    public class SingerService 
+    public class SingerService
     {
         private readonly IArtistRepository _repo;
         private readonly IMapper _mapper;

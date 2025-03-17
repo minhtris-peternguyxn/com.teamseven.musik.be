@@ -121,16 +121,58 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "com.teamseven.musik.be.Controllers.AuthenticationFunction.LoginController",
-    "Method": "Login",
-    "RelativePath": "api/Login",
+    "ContainingType": "com.teamseven.musik.be.Controllers.MainFlowFunction.GenreController",
+    "Method": "GetAllGenre",
+    "RelativePath": "api/genre",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "com.teamseven.musik.be.Controllers.MainFlowFunction.GenreController",
+    "Method": "AddNewGenre",
+    "RelativePath": "api/genre",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "loginRequest",
-        "Type": "com.teamseven.musik.be.Models.Request.LoginRequest",
+        "Name": "data",
+        "Type": "com.teamseven.musik.be.Models.RequestDTO.GenreDataTransfer",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "com.teamseven.musik.be.Controllers.MainFlowFunction.GenreController",
+    "Method": "GetOneGenre",
+    "RelativePath": "api/genre/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "com.teamseven.musik.be.Controllers.MainFlowFunction.GenreController",
+    "Method": "RemoveGenre",
+    "RelativePath": "api/genre/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
         "IsRequired": true
       }
     ],
@@ -163,22 +205,6 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "com.teamseven.musik.be.Controllers.AuthenticationFunction.RegisterController",
-    "Method": "Register",
-    "RelativePath": "api/Register",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "registerRequest",
-        "Type": "com.teamseven.musik.be.Models.Request.RegisterRequest",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
     "ContainingType": "com.teamseven.musik.be.Controllers.Templates.TestAPI",
     "Method": "GetHello",
     "RelativePath": "api/TestAPI",
@@ -198,7 +224,7 @@
     "Parameters": [
       {
         "Name": "track",
-        "Type": "com.teamseven.musik.be.Models.Request.TrackMusicRequest",
+        "Type": "com.teamseven.musik.be.Models.Request.TrackDataTransfer",
         "IsRequired": true
       }
     ],
@@ -224,7 +250,7 @@
     "Parameters": [
       {
         "Name": "track",
-        "Type": "com.teamseven.musik.be.Models.Request.TrackMusicRequest",
+        "Type": "com.teamseven.musik.be.Models.Request.TrackDataTransfer",
         "IsRequired": true
       }
     ],
@@ -257,6 +283,38 @@
       {
         "Name": "id",
         "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "com.teamseven.musik.be.Controllers.MainFlowFunction.TrackController",
+    "Method": "AddTrackToAlbum",
+    "RelativePath": "api/track/add-track-to-album",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "trackAlbum",
+        "Type": "com.teamseven.musik.be.Models.Entities.TrackAlbum",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "com.teamseven.musik.be.Controllers.MainFlowFunction.TrackController",
+    "Method": "AddTrackToGenre",
+    "RelativePath": "api/track/add-track-to-genre",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "trackGenre",
+        "Type": "com.teamseven.musik.be.Models.Entities.TrackGenre",
         "IsRequired": true
       }
     ],
@@ -312,12 +370,70 @@
   },
   {
     "ContainingType": "com.teamseven.musik.be.Controllers.MainFlowFunction.TrackController",
+    "Method": "GetTracksByIds",
+    "RelativePath": "api/track/get-tracks-by-ids",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "trackIds",
+        "Type": "System.Collections.Generic.List\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "com.teamseven.musik.be.Controllers.MainFlowFunction.TrackController",
     "Method": "GetTracksLast7Days",
     "RelativePath": "api/track/recent7days",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "com.teamseven.musik.be.Controllers.MainFlowFunction.TrackController",
+    "Method": "RemoveTrackFromAlbum",
+    "RelativePath": "api/track/remove-track-from-album",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "trackId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "albumId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "com.teamseven.musik.be.Controllers.MainFlowFunction.TrackController",
+    "Method": "RemoveTrackFromGenre",
+    "RelativePath": "api/track/remove-track-from-genre",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "trackId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "genreId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
     "ReturnTypes": []
   },
   {

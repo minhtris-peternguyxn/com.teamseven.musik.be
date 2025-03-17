@@ -15,11 +15,11 @@ namespace com.teamseven.musik.be.Repositories.interfaces
 
         Task<IEnumerable<Track>> ListTracksByIdsAsync(List<int> ids);
 
-        Task<IEnumerable<Track>> ListTrackByArtist(int artist);
+        Task<IEnumerable<TrackArtist>> ListTrackByArtist(int artist);
 
-        Task<IEnumerable<Track>> ListTrackByAlbum(int album);
+        Task<IEnumerable<TrackAlbum>> ListTrackByAlbum(int album);
 
-        Task<IEnumerable<Track>> ListTrackByGenere(int genere);
+        Task<IEnumerable<TrackGenre>> ListTrackByGenere(int genere);
 
         Task<IEnumerable<Track>> ListTrackLast7Days();
     }
