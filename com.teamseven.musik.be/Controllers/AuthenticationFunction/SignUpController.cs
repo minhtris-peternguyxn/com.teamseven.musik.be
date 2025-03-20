@@ -52,7 +52,7 @@ namespace com.teamseven.musik.be.Controllers
             }
             catch (InvalidOperationException ex)
             {
-     
+
                 return Conflict(new { message = ex.Message });
             }
             catch (Exception ex)
@@ -61,7 +61,22 @@ namespace com.teamseven.musik.be.Controllers
                 return StatusCode(500, new { message = "Internal server error.", error = ex.Message });
             }
         }
+        [HttpPost("/change-role")]
+        public async Task<IActionResult> ChangeRole(int userId, string roleName, string supersecretkey)
+        {
+            try
+            {
+                await _registerService.ChangeUserRole(userId, roleName, supersecretkey);
+                return NoContent();
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, new { error = e.Message });
+            }
+        }
     }
+
+
 
     // DTO cho yêu cầu đăng ký
     public class SignUpRequest

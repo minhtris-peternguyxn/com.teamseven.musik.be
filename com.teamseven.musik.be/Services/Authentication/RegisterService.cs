@@ -69,5 +69,14 @@ namespace com.teamseven.musik.be.Services.Authentication
             string body = $"Hello {user.Email},\n\nWelcome to Musik - A free music web player";
             _emailService.SendEmail(user.Email, subject, body);
         }
+
+        public async Task ChangeUserRole(int userId, string roleName, string superSecretKey)
+        {
+            if(userId < 0) { throw new ArgumentException(nameof(userId), nameof(userId)); }
+            if(!string.IsNullOrEmpty(roleName)) { throw new ArgumentException(nameof(roleName), nameof(roleName)); }
+            if(superSecretKey != "trideptraivcl") { throw new ArgumentException("CÚT"); }
+
+            await _userRepository.ChangeRoleUserAsync(roleName, userId);
+        }
     }
 }

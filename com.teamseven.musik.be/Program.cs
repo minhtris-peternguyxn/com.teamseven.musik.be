@@ -15,7 +15,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 // ================= CẤU HÌNH DB =================
 builder.Services.AddDbContext<MusikDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+//h xài mysql rồi :))
+
 
 // ================= CẤU HÌNH AUTHENTICATION =================
 ConfigureAuthentication(builder.Services, builder.Configuration);
@@ -38,7 +40,7 @@ builder.Services.AddCors(options =>
               .AllowAnyHeader();
     });
 });
-
+builder.WebHost.UseUrls("http://0.0.0.0:5000");
 // ================= CẤU HÌNH SWAGGER =================
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

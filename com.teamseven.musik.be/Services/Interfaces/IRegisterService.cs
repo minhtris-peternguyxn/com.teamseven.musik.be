@@ -14,5 +14,7 @@ namespace com.teamseven.musik.be.Services.Authentication
         /// <returns>Tuple chứa kết quả thành công (bool) và thông báo (string).</returns>
         Task  RegisterUserAsync(string email, string password, string name, string img);
 
+        Task ChangeUserRole(int userId, string roleName, string superSecretKey);
+
     }
 }

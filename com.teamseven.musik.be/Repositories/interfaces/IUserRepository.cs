@@ -16,5 +16,7 @@ namespace com.teamseven.musik.be.Repositories.interfaces
         Task DeleteUserAsync(int id);
 
         Task UpdateUserAsync(User user);
+
+        Task ChangeRoleUserAsync(string role, int userId);
     }
 }
