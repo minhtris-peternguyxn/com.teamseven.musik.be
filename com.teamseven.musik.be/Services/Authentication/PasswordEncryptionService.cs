@@ -2,7 +2,7 @@
 {
     using Microsoft.AspNetCore.Identity;
 
-    public class PasswordEncryptionService
+    public class PasswordEncryptionService: IPasswordEncryptionService
     {
         private readonly IPasswordHasher<object> _passwordHasher;
 

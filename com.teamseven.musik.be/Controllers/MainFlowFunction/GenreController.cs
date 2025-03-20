@@ -1,6 +1,7 @@
 ﻿using com.teamseven.musik.be.Models.Entities;
 using com.teamseven.musik.be.Models.RequestDTO;
 using com.teamseven.musik.be.Services.Authentication;
+using com.teamseven.musik.be.Services.Interfaces;
 using com.teamseven.musik.be.Services.QueryDB;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -12,9 +13,9 @@ namespace com.teamseven.musik.be.Controllers.MainFlowFunction
     [Route("api/genre")]
     public class GenreController : ControllerBase
     {
-        private readonly GenreService _service;
+        private readonly IGenreService _service;
 
-        public GenreController(GenreService service)
+        public GenreController(IGenreService service)
         {
             _service = service;
         }

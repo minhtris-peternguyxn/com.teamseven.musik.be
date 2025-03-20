@@ -1,17 +1,19 @@
 ﻿using AutoMapper;
 using AutoMapper.Internal;
+using com.teamseven.musik.be.Models.DataTranfers;
 using com.teamseven.musik.be.Models.Entities;
 using com.teamseven.musik.be.Models.Request;
 using com.teamseven.musik.be.Repositories.impl;
 using com.teamseven.musik.be.Repositories.interfaces;
 using com.teamseven.musik.be.Services.Authentication;
+using com.teamseven.musik.be.Services.Interfaces;
 
 namespace com.teamseven.musik.be.Services.QueryDB
 {
-    public class TrackService
+    public class TrackService: ITrackService
     {
         private readonly ITrackRepository _trackRepository;
-        private readonly AuthService _tokenService;
+        private readonly IAuthService _tokenService;
         private readonly IMapper _mapper;
         private readonly ITrackAlbumRepository _talbumRepository;
         private readonly ITrackArtistRepository _tartistRepository;
@@ -20,7 +22,7 @@ namespace com.teamseven.musik.be.Services.QueryDB
         private readonly IGenreRepository _genreRepository;
 
 
-        public TrackService(ITrackRepository trackRepository, AuthService tokenService, IMapper mapper, ITrackAlbumRepository albumRepository, ITrackArtistRepository artistRepository, ITrackGenreRepository genreRepository, IAlbumRepository album, IGenreRepository genre)
+        public TrackService(ITrackRepository trackRepository, IAuthService tokenService, IMapper mapper, ITrackAlbumRepository albumRepository, ITrackArtistRepository artistRepository, ITrackGenreRepository genreRepository, IAlbumRepository album, IGenreRepository genre)
         {
             _trackRepository = trackRepository;
             _tokenService = tokenService;
@@ -159,7 +161,7 @@ namespace com.teamseven.musik.be.Services.QueryDB
             {
                 for (int i = 0; i < trackUpdate.AlbumIds.Count; i++)
                 {
-                    _talbumRepository.Update(new TrackAlbum(trackUpdate.TrackId, trackUpdate.AlbumIds[i]));
+                    await _talbumRepository.Update(new TrackAlbum(trackUpdate.TrackId, trackUpdate.AlbumIds[i]));
                 }
             }
 
@@ -191,7 +193,7 @@ namespace com.teamseven.musik.be.Services.QueryDB
             }
 
             //add track to album
-            _talbumRepository.AddTrackAlbumAsync(trackAlbum);
+            await _talbumRepository.AddTrackAlbumAsync(trackAlbum);
         }
 
 
@@ -240,5 +242,33 @@ namespace com.teamseven.musik.be.Services.QueryDB
             await _tgenreRepository.RemoveTrackGenreAsync(trackId, genreId);
         }
 
+        public async Task AddTrackAsync(TrackCreateRequest track)
+        {
+            if (track == null)
+            {
+                throw new ArgumentNullException(nameof(track), "Track information is required.");
+            }
+
+            // Validate 
+            ValidateTrackInput(track);
+
+            // Chuyển đổi DTO sang entity và thêm vào repository
+            var trackEntity = _mapper.Map<Track>(track);
+            await _trackRepository.AddTrackAsync(trackEntity);
+        }
+
+        // Phương thức validation riêng
+        private void ValidateTrackInput(TrackCreateRequest track)
+        {
+            if (string.IsNullOrWhiteSpace(track.TrackName))
+                throw new ArgumentException("Track name is required.", nameof(track.TrackName));
+            if (string.IsNullOrWhiteSpace(track.TrackBlobsLink))
+                throw new ArgumentException("Track blobs link is required.", nameof(track.TrackBlobsLink));
+            if (string.IsNullOrWhiteSpace(track.Img))
+                throw new ArgumentException("Track img link is required.", nameof(track.Img));
+            if (track.Duration <= 0)
+                throw new ArgumentException("Duration must be a positive value.", nameof(track.Duration));
+            // Img có thể null, nên không bắt buộc
+        }
     }
 }

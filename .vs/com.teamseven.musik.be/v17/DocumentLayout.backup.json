@@ -3,16 +3,60 @@
   "WorkspaceRootPath": "C:\\com.teamseven.musik.be\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{5AAF145C-BCCB-4379-A60F-73CEB8AD9C5B}|com.teamseven.musik.be\\com.teamseven.musik.be.csproj|c:\\com.teamseven.musik.be\\com.teamseven.musik.be\\services\\querydb\\albumservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5AAF145C-BCCB-4379-A60F-73CEB8AD9C5B}|com.teamseven.musik.be\\com.teamseven.musik.be.csproj|solutionrelative:com.teamseven.musik.be\\services\\querydb\\albumservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{5AAF145C-BCCB-4379-A60F-73CEB8AD9C5B}|com.teamseven.musik.be\\com.teamseven.musik.be.csproj|c:\\com.teamseven.musik.be\\com.teamseven.musik.be\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{5AAF145C-BCCB-4379-A60F-73CEB8AD9C5B}|com.teamseven.musik.be\\com.teamseven.musik.be.csproj|solutionrelative:com.teamseven.musik.be\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AAF145C-BCCB-4379-A60F-73CEB8AD9C5B}|com.teamseven.musik.be\\com.teamseven.musik.be.csproj|c:\\com.teamseven.musik.be\\com.teamseven.musik.be\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AAF145C-BCCB-4379-A60F-73CEB8AD9C5B}|com.teamseven.musik.be\\com.teamseven.musik.be.csproj|solutionrelative:com.teamseven.musik.be\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AAF145C-BCCB-4379-A60F-73CEB8AD9C5B}|com.teamseven.musik.be\\com.teamseven.musik.be.csproj|c:\\com.teamseven.musik.be\\com.teamseven.musik.be\\controllers\\uploadmp3controller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AAF145C-BCCB-4379-A60F-73CEB8AD9C5B}|com.teamseven.musik.be\\com.teamseven.musik.be.csproj|solutionrelative:com.teamseven.musik.be\\controllers\\uploadmp3controller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AAF145C-BCCB-4379-A60F-73CEB8AD9C5B}|com.teamseven.musik.be\\com.teamseven.musik.be.csproj|c:\\com.teamseven.musik.be\\com.teamseven.musik.be\\controllers\\mainflowfunction\\trackcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AAF145C-BCCB-4379-A60F-73CEB8AD9C5B}|com.teamseven.musik.be\\com.teamseven.musik.be.csproj|solutionrelative:com.teamseven.musik.be\\controllers\\mainflowfunction\\trackcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AAF145C-BCCB-4379-A60F-73CEB8AD9C5B}|com.teamseven.musik.be\\com.teamseven.musik.be.csproj|c:\\com.teamseven.musik.be\\com.teamseven.musik.be\\controllers\\mainflowfunction\\albumcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AAF145C-BCCB-4379-A60F-73CEB8AD9C5B}|com.teamseven.musik.be\\com.teamseven.musik.be.csproj|solutionrelative:com.teamseven.musik.be\\controllers\\mainflowfunction\\albumcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{5AAF145C-BCCB-4379-A60F-73CEB8AD9C5B}|com.teamseven.musik.be\\com.teamseven.musik.be.csproj|c:\\com.teamseven.musik.be\\com.teamseven.musik.be\\services\\interfaces\\ialbumservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{5AAF145C-BCCB-4379-A60F-73CEB8AD9C5B}|com.teamseven.musik.be\\com.teamseven.musik.be.csproj|solutionrelative:com.teamseven.musik.be\\services\\interfaces\\ialbumservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5AAF145C-BCCB-4379-A60F-73CEB8AD9C5B}|com.teamseven.musik.be\\com.teamseven.musik.be.csproj|c:\\com.teamseven.musik.be\\com.teamseven.musik.be\\controllers\\mainflowfunction\\albumcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5AAF145C-BCCB-4379-A60F-73CEB8AD9C5B}|com.teamseven.musik.be\\com.teamseven.musik.be.csproj|solutionrelative:com.teamseven.musik.be\\controllers\\mainflowfunction\\albumcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{5AAF145C-BCCB-4379-A60F-73CEB8AD9C5B}|com.teamseven.musik.be\\com.teamseven.musik.be.csproj|c:\\com.teamseven.musik.be\\com.teamseven.musik.be\\services\\querydb\\trackservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AAF145C-BCCB-4379-A60F-73CEB8AD9C5B}|com.teamseven.musik.be\\com.teamseven.musik.be.csproj|solutionrelative:com.teamseven.musik.be\\services\\querydb\\trackservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AAF145C-BCCB-4379-A60F-73CEB8AD9C5B}|com.teamseven.musik.be\\com.teamseven.musik.be.csproj|c:\\com.teamseven.musik.be\\com.teamseven.musik.be\\services\\interfaces\\itrackservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AAF145C-BCCB-4379-A60F-73CEB8AD9C5B}|com.teamseven.musik.be\\com.teamseven.musik.be.csproj|solutionrelative:com.teamseven.musik.be\\services\\interfaces\\itrackservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AAF145C-BCCB-4379-A60F-73CEB8AD9C5B}|com.teamseven.musik.be\\com.teamseven.musik.be.csproj|c:\\com.teamseven.musik.be\\com.teamseven.musik.be\\models\\datatranfers\\trackcreaterequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AAF145C-BCCB-4379-A60F-73CEB8AD9C5B}|com.teamseven.musik.be\\com.teamseven.musik.be.csproj|solutionrelative:com.teamseven.musik.be\\models\\datatranfers\\trackcreaterequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AAF145C-BCCB-4379-A60F-73CEB8AD9C5B}|com.teamseven.musik.be\\com.teamseven.musik.be.csproj|c:\\com.teamseven.musik.be\\com.teamseven.musik.be\\models\\datatranfers\\trackdatatransfer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AAF145C-BCCB-4379-A60F-73CEB8AD9C5B}|com.teamseven.musik.be\\com.teamseven.musik.be.csproj|solutionrelative:com.teamseven.musik.be\\models\\datatranfers\\trackdatatransfer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AAF145C-BCCB-4379-A60F-73CEB8AD9C5B}|com.teamseven.musik.be\\com.teamseven.musik.be.csproj|c:\\com.teamseven.musik.be\\com.teamseven.musik.be\\models\\entities\\track.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AAF145C-BCCB-4379-A60F-73CEB8AD9C5B}|com.teamseven.musik.be\\com.teamseven.musik.be.csproj|solutionrelative:com.teamseven.musik.be\\models\\entities\\track.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AAF145C-BCCB-4379-A60F-73CEB8AD9C5B}|com.teamseven.musik.be\\com.teamseven.musik.be.csproj|c:\\com.teamseven.musik.be\\com.teamseven.musik.be\\models\\datatranfers\\loginrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AAF145C-BCCB-4379-A60F-73CEB8AD9C5B}|com.teamseven.musik.be\\com.teamseven.musik.be.csproj|solutionrelative:com.teamseven.musik.be\\models\\datatranfers\\loginrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AAF145C-BCCB-4379-A60F-73CEB8AD9C5B}|com.teamseven.musik.be\\com.teamseven.musik.be.csproj|c:\\com.teamseven.musik.be\\com.teamseven.musik.be\\services\\querydb\\albumservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AAF145C-BCCB-4379-A60F-73CEB8AD9C5B}|com.teamseven.musik.be\\com.teamseven.musik.be.csproj|solutionrelative:com.teamseven.musik.be\\services\\querydb\\albumservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AAF145C-BCCB-4379-A60F-73CEB8AD9C5B}|com.teamseven.musik.be\\com.teamseven.musik.be.csproj|c:\\com.teamseven.musik.be\\com.teamseven.musik.be\\models\\datatranfers\\albumrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AAF145C-BCCB-4379-A60F-73CEB8AD9C5B}|com.teamseven.musik.be\\com.teamseven.musik.be.csproj|solutionrelative:com.teamseven.musik.be\\models\\datatranfers\\albumrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{5AAF145C-BCCB-4379-A60F-73CEB8AD9C5B}|com.teamseven.musik.be\\com.teamseven.musik.be.csproj|c:\\com.teamseven.musik.be\\com.teamseven.musik.be\\models\\entities\\album.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -26,62 +70,8 @@
       "DocumentGroups": [
         {
           "DockedHeight": 11,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Album.cs",
-              "DocumentMoniker": "C:\\com.teamseven.musik.be\\com.teamseven.musik.be\\Models\\Entities\\Album.cs",
-              "RelativeDocumentMoniker": "com.teamseven.musik.be\\Models\\Entities\\Album.cs",
-              "ToolTip": "C:\\com.teamseven.musik.be\\com.teamseven.musik.be\\Models\\Entities\\Album.cs",
-              "RelativeToolTip": "com.teamseven.musik.be\\Models\\Entities\\Album.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAbAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-17T04:10:46.027Z",
-              "IsPinned": true,
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "AlbumService.cs",
-              "DocumentMoniker": "C:\\com.teamseven.musik.be\\com.teamseven.musik.be\\Services\\QueryDB\\AlbumService.cs",
-              "RelativeDocumentMoniker": "com.teamseven.musik.be\\Services\\QueryDB\\AlbumService.cs",
-              "ToolTip": "C:\\com.teamseven.musik.be\\com.teamseven.musik.be\\Services\\QueryDB\\AlbumService.cs",
-              "RelativeToolTip": "com.teamseven.musik.be\\Services\\QueryDB\\AlbumService.cs",
-              "ViewState": "AgIAAH8AAAAAAAAAAAAcwIwAAAAEAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-17T03:57:39.134Z",
-              "IsPinned": true,
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "IAlbumService.cs",
-              "DocumentMoniker": "C:\\com.teamseven.musik.be\\com.teamseven.musik.be\\Services\\Interfaces\\IAlbumService.cs",
-              "RelativeDocumentMoniker": "com.teamseven.musik.be\\Services\\Interfaces\\IAlbumService.cs",
-              "ToolTip": "C:\\com.teamseven.musik.be\\com.teamseven.musik.be\\Services\\Interfaces\\IAlbumService.cs",
-              "RelativeToolTip": "com.teamseven.musik.be\\Services\\Interfaces\\IAlbumService.cs",
-              "ViewState": "AgIAAAIAAAAAAAAAAAAawBIAAAAmAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-17T05:53:56.658Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "AlbumController.cs",
-              "DocumentMoniker": "C:\\com.teamseven.musik.be\\com.teamseven.musik.be\\Controllers\\MainFlowFunction\\AlbumController.cs",
-              "RelativeDocumentMoniker": "com.teamseven.musik.be\\Controllers\\MainFlowFunction\\AlbumController.cs",
-              "ToolTip": "C:\\com.teamseven.musik.be\\com.teamseven.musik.be\\Controllers\\MainFlowFunction\\AlbumController.cs",
-              "RelativeToolTip": "com.teamseven.musik.be\\Controllers\\MainFlowFunction\\AlbumController.cs",
-              "ViewState": "AgIAADwAAAAAAAAAAAAowF4AAAANAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-17T05:16:40.803Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
@@ -91,8 +81,199 @@
               "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:1:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\com.teamseven.musik.be\\com.teamseven.musik.be\\appsettings.json",
+              "RelativeDocumentMoniker": "com.teamseven.musik.be\\appsettings.json",
+              "ToolTip": "C:\\com.teamseven.musik.be\\com.teamseven.musik.be\\appsettings.json",
+              "RelativeToolTip": "com.teamseven.musik.be\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-03-18T06:45:17.875Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\com.teamseven.musik.be\\com.teamseven.musik.be\\Program.cs",
+              "RelativeDocumentMoniker": "com.teamseven.musik.be\\Program.cs",
+              "ToolTip": "C:\\com.teamseven.musik.be\\com.teamseven.musik.be\\Program.cs",
+              "RelativeToolTip": "com.teamseven.musik.be\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-18T06:45:16.953Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "UploadMP3Controller.cs",
+              "DocumentMoniker": "C:\\com.teamseven.musik.be\\com.teamseven.musik.be\\Controllers\\UploadMP3Controller.cs",
+              "RelativeDocumentMoniker": "com.teamseven.musik.be\\Controllers\\UploadMP3Controller.cs",
+              "ToolTip": "C:\\com.teamseven.musik.be\\com.teamseven.musik.be\\Controllers\\UploadMP3Controller.cs",
+              "RelativeToolTip": "com.teamseven.musik.be\\Controllers\\UploadMP3Controller.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-18T06:40:15.272Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "ITrackService.cs",
+              "DocumentMoniker": "C:\\com.teamseven.musik.be\\com.teamseven.musik.be\\Services\\Interfaces\\ITrackService.cs",
+              "RelativeDocumentMoniker": "com.teamseven.musik.be\\Services\\Interfaces\\ITrackService.cs",
+              "ToolTip": "C:\\com.teamseven.musik.be\\com.teamseven.musik.be\\Services\\Interfaces\\ITrackService.cs",
+              "RelativeToolTip": "com.teamseven.musik.be\\Services\\Interfaces\\ITrackService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-18T06:28:55.628Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "LoginRequest.cs",
+              "DocumentMoniker": "C:\\com.teamseven.musik.be\\com.teamseven.musik.be\\Models\\DataTranfers\\LoginRequest.cs",
+              "RelativeDocumentMoniker": "com.teamseven.musik.be\\Models\\DataTranfers\\LoginRequest.cs",
+              "ToolTip": "C:\\com.teamseven.musik.be\\com.teamseven.musik.be\\Models\\DataTranfers\\LoginRequest.cs",
+              "RelativeToolTip": "com.teamseven.musik.be\\Models\\DataTranfers\\LoginRequest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-18T06:27:44.036Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "AlbumService.cs",
+              "DocumentMoniker": "C:\\com.teamseven.musik.be\\com.teamseven.musik.be\\Services\\QueryDB\\AlbumService.cs",
+              "RelativeDocumentMoniker": "com.teamseven.musik.be\\Services\\QueryDB\\AlbumService.cs",
+              "ToolTip": "C:\\com.teamseven.musik.be\\com.teamseven.musik.be\\Services\\QueryDB\\AlbumService.cs",
+              "RelativeToolTip": "com.teamseven.musik.be\\Services\\QueryDB\\AlbumService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-18T06:25:57.113Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "AlbumRequest.cs",
+              "DocumentMoniker": "C:\\com.teamseven.musik.be\\com.teamseven.musik.be\\Models\\DataTranfers\\AlbumRequest.cs",
+              "RelativeDocumentMoniker": "com.teamseven.musik.be\\Models\\DataTranfers\\AlbumRequest.cs",
+              "ToolTip": "C:\\com.teamseven.musik.be\\com.teamseven.musik.be\\Models\\DataTranfers\\AlbumRequest.cs",
+              "RelativeToolTip": "com.teamseven.musik.be\\Models\\DataTranfers\\AlbumRequest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-18T06:25:34.542Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "TrackController.cs",
+              "DocumentMoniker": "C:\\com.teamseven.musik.be\\com.teamseven.musik.be\\Controllers\\MainFlowFunction\\TrackController.cs",
+              "RelativeDocumentMoniker": "com.teamseven.musik.be\\Controllers\\MainFlowFunction\\TrackController.cs",
+              "ToolTip": "C:\\com.teamseven.musik.be\\com.teamseven.musik.be\\Controllers\\MainFlowFunction\\TrackController.cs",
+              "RelativeToolTip": "com.teamseven.musik.be\\Controllers\\MainFlowFunction\\TrackController.cs",
+              "ViewState": "AgIAAG0AAAAAAAAAAADwvxoAAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-18T06:24:17.803Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "IAlbumService.cs",
+              "DocumentMoniker": "C:\\com.teamseven.musik.be\\com.teamseven.musik.be\\Services\\Interfaces\\IAlbumService.cs",
+              "RelativeDocumentMoniker": "com.teamseven.musik.be\\Services\\Interfaces\\IAlbumService.cs",
+              "ToolTip": "C:\\com.teamseven.musik.be\\com.teamseven.musik.be\\Services\\Interfaces\\IAlbumService.cs",
+              "RelativeToolTip": "com.teamseven.musik.be\\Services\\Interfaces\\IAlbumService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-18T06:27:09.862Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "AlbumController.cs",
+              "DocumentMoniker": "C:\\com.teamseven.musik.be\\com.teamseven.musik.be\\Controllers\\MainFlowFunction\\AlbumController.cs",
+              "RelativeDocumentMoniker": "com.teamseven.musik.be\\Controllers\\MainFlowFunction\\AlbumController.cs",
+              "ToolTip": "C:\\com.teamseven.musik.be\\com.teamseven.musik.be\\Controllers\\MainFlowFunction\\AlbumController.cs",
+              "RelativeToolTip": "com.teamseven.musik.be\\Controllers\\MainFlowFunction\\AlbumController.cs",
+              "ViewState": "AgIAADcAAAAAAAAAAAAowEQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-18T06:25:37.384Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "TrackService.cs",
+              "DocumentMoniker": "C:\\com.teamseven.musik.be\\com.teamseven.musik.be\\Services\\QueryDB\\TrackService.cs",
+              "RelativeDocumentMoniker": "com.teamseven.musik.be\\Services\\QueryDB\\TrackService.cs",
+              "ToolTip": "C:\\com.teamseven.musik.be\\com.teamseven.musik.be\\Services\\QueryDB\\TrackService.cs",
+              "RelativeToolTip": "com.teamseven.musik.be\\Services\\QueryDB\\TrackService.cs",
+              "ViewState": "AgIAANYAAAAAAAAAAAAAAAsBAABbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-18T06:29:11.952Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "TrackDataTransfer.cs",
+              "DocumentMoniker": "C:\\com.teamseven.musik.be\\com.teamseven.musik.be\\Models\\DataTranfers\\TrackDataTransfer.cs",
+              "RelativeDocumentMoniker": "com.teamseven.musik.be\\Models\\DataTranfers\\TrackDataTransfer.cs",
+              "ToolTip": "C:\\com.teamseven.musik.be\\com.teamseven.musik.be\\Models\\DataTranfers\\TrackDataTransfer.cs",
+              "RelativeToolTip": "com.teamseven.musik.be\\Models\\DataTranfers\\TrackDataTransfer.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-18T06:27:45.438Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Track.cs",
+              "DocumentMoniker": "C:\\com.teamseven.musik.be\\com.teamseven.musik.be\\Models\\Entities\\Track.cs",
+              "RelativeDocumentMoniker": "com.teamseven.musik.be\\Models\\Entities\\Track.cs",
+              "ToolTip": "C:\\com.teamseven.musik.be\\com.teamseven.musik.be\\Models\\Entities\\Track.cs",
+              "RelativeToolTip": "com.teamseven.musik.be\\Models\\Entities\\Track.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-18T06:28:09.953Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "TrackCreateRequest.cs",
+              "DocumentMoniker": "C:\\com.teamseven.musik.be\\com.teamseven.musik.be\\Models\\DataTranfers\\TrackCreateRequest.cs",
+              "RelativeDocumentMoniker": "com.teamseven.musik.be\\Models\\DataTranfers\\TrackCreateRequest.cs",
+              "ToolTip": "C:\\com.teamseven.musik.be\\com.teamseven.musik.be\\Models\\DataTranfers\\TrackCreateRequest.cs",
+              "RelativeToolTip": "com.teamseven.musik.be\\Models\\DataTranfers\\TrackCreateRequest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-18T06:25:21.607Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "Album.cs",
+              "DocumentMoniker": "C:\\com.teamseven.musik.be\\com.teamseven.musik.be\\Models\\Entities\\Album.cs",
+              "RelativeDocumentMoniker": "com.teamseven.musik.be\\Models\\Entities\\Album.cs",
+              "ToolTip": "C:\\com.teamseven.musik.be\\com.teamseven.musik.be\\Models\\Entities\\Album.cs",
+              "RelativeToolTip": "com.teamseven.musik.be\\Models\\Entities\\Album.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-18T06:26:29.323Z",
+              "EditorCaption": ""
             }
           ]
         },

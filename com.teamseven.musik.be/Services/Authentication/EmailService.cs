@@ -4,7 +4,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace com.teamseven.musik.be.Services.Authentication
 {
-    public class EmailService
+    public class EmailService: IEmailService
     {
         private readonly IConfiguration _configuration;
 

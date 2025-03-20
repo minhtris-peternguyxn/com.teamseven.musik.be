@@ -1,4 +1,4 @@
-﻿using com.teamseven.musik.be.Models.DataTranfers.Album;
+﻿using com.teamseven.musik.be.Models.DataTranfers;
 using com.teamseven.musik.be.Models.Entities;
 using com.teamseven.musik.be.Repositories.interfaces;
 using com.teamseven.musik.be.Services.Interfaces;
@@ -14,12 +14,11 @@ namespace com.teamseven.musik.be.Services
         private readonly IAlbumRepository _albumRepository;
         private readonly IAlbumArtistRepository _albumArtistRepository;
         private readonly ITrackAlbumRepository _trackAlbumRepository;
-
         public AlbumService(IAlbumRepository albumRepository, IAlbumArtistRepository albumArtistRepository, ITrackAlbumRepository trackAlbumRepository)
         {
-            _albumRepository = albumRepository;
-            _albumArtistRepository = albumArtistRepository;
-            _trackAlbumRepository = trackAlbumRepository;      
+            _albumRepository = albumRepository ?? throw new ArgumentNullException(nameof(albumRepository));
+            _albumArtistRepository = albumArtistRepository ?? throw new ArgumentNullException(nameof(albumArtistRepository));
+            _trackAlbumRepository = trackAlbumRepository ?? throw new ArgumentNullException(nameof(trackAlbumRepository));
         }
 
         public async Task<IEnumerable<Album>> GetAllAlbumsAsync()
@@ -27,16 +26,16 @@ namespace com.teamseven.musik.be.Services
             return await _albumRepository.GetAllAlbumsAsync();
         }
 
-        // Lấy album theo ID
         public async Task<Album> GetAlbumByIdAsync(int id)
         {
-            if (id < 0) throw new ArgumentException("ID is invalid");
-            return await _albumRepository.GetAlbumByIdAsync(id);
+            if (id <= 0) throw new ArgumentOutOfRangeException(nameof(id), "Album ID must be greater than zero.");
+            var album = await _albumRepository.GetAlbumByIdAsync(id);
+            return album ?? throw new KeyNotFoundException($"Album with ID {id} not found.");
         }
 
         public async Task<IEnumerable<Album>> GetAlbumByNameAsync(string name)
         {
-            if(name  == null) throw new ArgumentNullException("name");
+            if(string.IsNullOrWhiteSpace(name)) throw new ArgumentException("Album name cannot be null or empty.", nameof(name));
             return await _albumRepository.GetAlbumByNameAsync(name);
         }
 
@@ -88,28 +87,28 @@ namespace com.teamseven.musik.be.Services
 
         public async Task CreateNewAlbum(AlbumRequest album)
         {
-            if (album == null)
+            if (album == null) throw new ArgumentNullException(nameof(album), "Album data cannot be null.");
+            if (string.IsNullOrWhiteSpace(album.AlbumName)) throw new ArgumentException("Album name is required.", nameof(album.AlbumName));
+
+            var newAlbum = new Album
             {
-                throw new ArgumentNullException(nameof(album), "Invalid album data.");
-            }
-            Album input = new Album();
-            input.AlbumName = album.AlbumName;
-            input.CreatedDate = DateTime.Now;
-            input.ReleaseDate = album.ReleaseDate;
-            input.Img = album.Img;
+                AlbumName = album.AlbumName,
+                CreatedDate = DateTime.Now,
+                ReleaseDate = album.ReleaseDate,
+                Img = album.Img
+            };
 
-            await _albumRepository.AddAlbumAsync(input);
+            await _albumRepository.AddAlbumAsync(newAlbum);
         }
-
         public async Task AddArtistToAlbum(List<AlbumArtist> artists)
         {
-            if(artists == null) throw new ArgumentNullException(nameof(artists));   
-            for (int i = 0; i < artists.Count; i++)
+            if (artists == null || !artists.Any()) throw new ArgumentNullException(nameof(artists), "Artist list cannot be null or empty.");
+
+            foreach (var artist in artists)
             {
-                //check exist before add
-               if( await _albumArtistRepository.GetAlbumArtistAsync(artists[i].AlbumId, artists[i].ArtistId) == null)
+                if (await _albumArtistRepository.GetAlbumArtistAsync(artist.AlbumId, artist.ArtistId) == null)
                 {
-                   await _albumArtistRepository.AddAlbumArtistAsync(artists[i]);
+                    await _albumArtistRepository.AddAlbumArtistAsync(artist);
                 }
             }
         }
@@ -139,23 +138,22 @@ namespace com.teamseven.musik.be.Services
         }
 
         public async Task DeleteAlbum(int id)
-        {   
-            if(id < 0) throw new ArgumentOutOfRangeException("Invalid ID");
-            //check album exists
-            if(await _albumRepository.GetAlbumByIdAsync(id) == null)
-            {
-                throw new KeyNotFoundException($"Album with ID {id} was not found.");
-            }
-            else
-            {
-                await _albumRepository.DeleteAlbumAsync(id);
-            }
+        {
+            if (id <= 0) throw new ArgumentOutOfRangeException(nameof(id), "Album ID must be greater than zero.");
+            var album = await _albumRepository.GetAlbumByIdAsync(id);
+            if (album == null) throw new KeyNotFoundException($"Album with ID {id} not found.");
+
+            await _albumRepository.DeleteAlbumAsync(id);
         }
 
         public async Task UpdateAlbum(Album album)
         {
-            if (album == null) throw new ArgumentNullException("Album is Empty");
-            if (await GetAlbumByIdAsync(album.AlbumId) == null) { throw new ArgumentNullException(nameof(album)); }
+            if (album == null) throw new ArgumentNullException(nameof(album), "Album data cannot be null.");
+            if (album.AlbumId <= 0) throw new ArgumentOutOfRangeException(nameof(album.AlbumId), "Album ID must be greater than zero.");
+
+            var existingAlbum = await _albumRepository.GetAlbumByIdAsync(album.AlbumId);
+            if (existingAlbum == null) throw new KeyNotFoundException($"Album with ID {album.AlbumId} not found.");
+
             await _albumRepository.UpdateAlbumAsync(album);
         }
     }

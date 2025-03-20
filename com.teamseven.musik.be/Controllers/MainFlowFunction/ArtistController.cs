@@ -1,6 +1,7 @@
 ﻿using com.teamseven.musik.be.Models.RequestDTO;
 using com.teamseven.musik.be.Repositories.interfaces;
 using com.teamseven.musik.be.Services.Authentication;
+using com.teamseven.musik.be.Services.Interfaces;
 using com.teamseven.musik.be.Services.QueryDB;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -11,9 +12,9 @@ namespace com.teamseven.musik.be.Controllers.MainFlowFunction
     [Route("api/artist")]
     public class ArtistController : ControllerBase
     {
-        private readonly SingerService _singService;
+        private readonly ISingerService _singService;
         private readonly IArtistRepository _repo;
-        public ArtistController(IArtistRepository repo, SingerService singService)
+        public ArtistController(IArtistRepository repo, ISingerService singService)
         {
 
             _repo = repo;

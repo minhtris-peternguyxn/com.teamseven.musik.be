@@ -1,13 +1,14 @@
 ﻿using AutoMapper;
 using com.teamseven.musik.be.Models.Entities;
 using com.teamseven.musik.be.Models.RequestDTO;
+using com.teamseven.musik.be.Services.Interfaces;
 using com.teamseven.musik.be.Repositories.interfaces;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace com.teamseven.musik.be.Services.QueryDB
 {
-    public class GenreService
+    public class GenreService: IGenreService
     {
         private readonly IGenreRepository _repo;
         private readonly IMapper _mapper;
@@ -31,7 +32,7 @@ namespace com.teamseven.musik.be.Services.QueryDB
         public async Task AddGenreAsync(GenreDataTransfer genre)
         {
             // Check if genre exists
-            Genre tmp = await _repo.GetGerneByNameAsync(genre.GenreName);
+            var tmp = await _repo.GetGenresByNameAsync(genre.GenreName);
             if (tmp != null)
             {
                 throw new InvalidOperationException("Genre already exists.");

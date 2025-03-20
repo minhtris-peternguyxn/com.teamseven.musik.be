@@ -1,13 +1,14 @@
 ﻿using com.teamseven.musik.be.Models.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
+using com.teamseven.musik.be.Services.Interfaces;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
 namespace com.teamseven.musik.be.Services.Authentication
 {
-    public class AuthService
+    public class AuthService: IAuthService
     {
 
         private readonly IConfiguration _configuration;
@@ -104,6 +105,7 @@ namespace com.teamseven.musik.be.Services.Authentication
 
         public string GenerateJwtToken(User user)
         {
+            if(user == null) throw new ArgumentNullException("user is null, cannot generate token");
             var jwtKey = _configuration["Jwt:Key"];
             if (string.IsNullOrEmpty(jwtKey))
             {

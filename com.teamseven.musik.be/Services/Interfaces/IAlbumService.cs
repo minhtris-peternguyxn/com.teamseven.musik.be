@@ -1,4 +1,4 @@
-﻿using com.teamseven.musik.be.Models.DataTranfers.Album;
+﻿using com.teamseven.musik.be.Models.DataTranfers;
 using com.teamseven.musik.be.Models.Entities;
 
 namespace com.teamseven.musik.be.Services.Interfaces

@@ -1,32 +1,33 @@
 ﻿using com.teamseven.musik.be.Models.Entities;
 using com.teamseven.musik.be.Repositories.interfaces;
+using System;
 using System.Threading.Tasks;
 
 namespace com.teamseven.musik.be.Services.Authentication
 {
-    public class RegisterService
+    public class RegisterService : IRegisterService
     {
         private readonly IUserRepository _userRepository;
-        private readonly PasswordEncryptionService _passwordEncryptionService;
-        private readonly EmailService _emailService;
+        private readonly IPasswordEncryptionService _passwordEncryptionService;
+        private readonly IEmailService _emailService;
 
-        public RegisterService(IUserRepository userRepository, PasswordEncryptionService passwordEncryptionService, EmailService emailService) { _userRepository = userRepository; _passwordEncryptionService = passwordEncryptionService; _emailService = emailService; }
-        public async Task<(bool isSuccess, string message)> RegisterUserAsync(string email, string password, string name, string img)
+        public RegisterService(
+            IUserRepository userRepository,
+            IPasswordEncryptionService passwordEncryptionService,
+            IEmailService emailService)
         {
-            // Kiểm tra tính duy nhất của email
-            var existingUser = await _userRepository.GetByEmailAsync(email);
-            if (existingUser != null)
-            {
-                return (false, "Email already in use.");
-            }
+            _userRepository = userRepository ?? throw new ArgumentNullException(nameof(userRepository));
+            _passwordEncryptionService = passwordEncryptionService ?? throw new ArgumentNullException(nameof(passwordEncryptionService));
+            _emailService = emailService ?? throw new ArgumentNullException(nameof(emailService));
+        }
 
-            // Kiểm tra các trường bắt buộc không được để trống
-            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password) || string.IsNullOrEmpty(name))
-            {
-                return (false, "Email, password, and name are required.");
-            }
+        public async Task RegisterUserAsync(string email, string password, string name, string img)
+        {
+            // Validation
+            ValidateInput(email, password, name);
+            await ValidateEmailUniqueness(email);
 
-            // Mã hóa mật khẩu
+            // Tạo user mới
             var user = new User
             {
                 Email = email,
@@ -37,25 +38,36 @@ namespace com.teamseven.musik.be.Services.Authentication
                 Role = "User",
                 AccountType = "Free",
                 ImgLink = img,
-                NumberOfSubscriber = 0,
-
+                NumberOfSubscriber = 0
             };
 
-
-            // Lưu thông tin người dùng vào cơ sở dữ liệu
+            // Lưu vào database và gửi email
             await _userRepository.AddUserAsync(user);
             SendWelcomeMail(user);
-
-            return (true, "Registration successful.");
         }
 
+        private void ValidateInput(string email, string password, string name)
+        {
+            if (string.IsNullOrEmpty(email))
+                throw new ArgumentException("Email is required.", nameof(email));
+            if (string.IsNullOrEmpty(password))
+                throw new ArgumentException("Password is required.", nameof(password));
+            if (string.IsNullOrEmpty(name))
+                throw new ArgumentException("Name is required.", nameof(name));
+        }
+
+        private async Task ValidateEmailUniqueness(string email)
+        {
+            var existingUser = await _userRepository.GetByEmailAsync(email);
+            if (existingUser != null)
+                throw new InvalidOperationException("Email already in use.");
+        }
 
         private void SendWelcomeMail(User user)
         {
-            string subject = "Wellcome to Musik";
-            string body = $"Hello {user.Email},\n\nWellcome to Musik - A free music web player";
+            string subject = "Welcome to Musik";
+            string body = $"Hello {user.Email},\n\nWelcome to Musik - A free music web player";
             _emailService.SendEmail(user.Email, subject, body);
-
         }
     }
 }
