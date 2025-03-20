@@ -40,7 +40,7 @@ builder.Services.AddCors(options =>
               .AllowAnyHeader();
     });
 });
-builder.WebHost.UseUrls("http://0.0.0.0:5000");
+builder.WebHost.UseUrls("https://0.0.0.0:5000");
 // ================= CẤU HÌNH SWAGGER =================
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

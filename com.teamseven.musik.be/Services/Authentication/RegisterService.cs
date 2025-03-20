@@ -73,7 +73,7 @@ namespace com.teamseven.musik.be.Services.Authentication
         public async Task ChangeUserRole(int userId, string roleName, string superSecretKey)
         {
             if(userId < 0) { throw new ArgumentException(nameof(userId), nameof(userId)); }
-            if(!string.IsNullOrEmpty(roleName)) { throw new ArgumentException(nameof(roleName), nameof(roleName)); }
+            if(string.IsNullOrEmpty(roleName)) { throw new ArgumentException(nameof(roleName), nameof(roleName)); }
             if(superSecretKey != "trideptraivcl") { throw new ArgumentException("CÚT"); }
 
             await _userRepository.ChangeRoleUserAsync(roleName, userId);
