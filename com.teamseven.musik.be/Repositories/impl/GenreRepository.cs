@@ -20,6 +20,12 @@ namespace com.teamseven.musik.be.Repositories.impl
             return _context.SaveChangesAsync();
         }
 
+        public async Task<bool> CheckGenresExitstAsync(string name)
+        {
+            var genre = await _context.Genres.FirstOrDefaultAsync(gen => gen.GenreName == name);
+            return genre != null;
+        }
+
         public async Task DeleteGenreAsync(int id)
         {
             var genre = await _context.Genres.FindAsync(id);
@@ -37,12 +43,11 @@ namespace com.teamseven.musik.be.Repositories.impl
         }
 
 
-
-
-        public async Task<Genre> GetGenreAsync(int id)
+        public async Task<Genre?> GetGenreAsync(int id)
         {
             return await _context.Genres.FindAsync(id);
         }
+
 
         public async Task<IEnumerable<Genre>> GetGenresByNameAsync(string name)
         {

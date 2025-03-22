@@ -220,7 +220,7 @@
     "Parameters": [
       {
         "Name": "artist",
-        "Type": "com.teamseven.musik.be.Models.RequestDTO.SingerInfoDataTransfer",
+        "Type": "com.teamseven.musik.be.Models.DataTranfers.ArtistRequest",
         "IsRequired": true
       }
     ],
@@ -272,7 +272,7 @@
     "Parameters": [
       {
         "Name": "data",
-        "Type": "com.teamseven.musik.be.Models.RequestDTO.GenreDataTransfer",
+        "Type": "com.teamseven.musik.be.Models.RequestDTO.GenreRequest",
         "IsRequired": true
       }
     ],
@@ -353,6 +353,26 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "com.teamseven.musik.be.Controllers.LoginController",
+    "Method": "Test",
+    "RelativePath": "api/Login/test",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "com.teamseven.musik.be.Controllers.LoginController",
+    "Method": "TestNoPolicy",
+    "RelativePath": "api/Login/test-no-policy",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "com.teamseven.musik.be.Controllers.SignUpController",
     "Method": "SignUp",
     "RelativePath": "api/signup",
@@ -414,7 +434,7 @@
     "Parameters": [
       {
         "Name": "track",
-        "Type": "com.teamseven.musik.be.Models.Request.TrackDataTransfer",
+        "Type": "com.teamseven.musik.be.Models.DataTranfers.TrackUpdateRequest",
         "IsRequired": true
       }
     ],

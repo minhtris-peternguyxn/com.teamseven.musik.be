@@ -9,6 +9,8 @@
         Task RemoveTrackArtistAsync(int trackId, int artistId);
         Task<IEnumerable<TrackArtist>> GetAllTrackArtistsAsync();
         Task Update (TrackArtist trackArtist);
+
+        Task<TrackArtist?> FindTrackArtistAsync(int trackId);
     }
 
 }

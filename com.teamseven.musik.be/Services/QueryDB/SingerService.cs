@@ -4,6 +4,7 @@ using com.teamseven.musik.be.Models.RequestDTO;
 using com.teamseven.musik.be.Services.Interfaces;
 using com.teamseven.musik.be.Repositories.impl;
 using com.teamseven.musik.be.Repositories.interfaces;
+using com.teamseven.musik.be.Models.DataTranfers;
 
 namespace com.teamseven.musik.be.Services.QueryDB
 {
@@ -18,11 +19,24 @@ namespace com.teamseven.musik.be.Services.QueryDB
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
-        public Artist ConvertArtist(SingerInfoDataTransfer info)
+        public Artist ConvertArtist(ArtistRequest info)
         {
-            return _mapper.Map<Artist>(info);
-        }
+            if (info == null)
+            {
+                throw new ArgumentNullException(nameof(info), "ArtistRequest cannot be null.");
+            }
 
+            var artist = new Artist
+            {
+                ArtistName = info.ArtistName,
+                VerifiedArtist = info.VerifiedArtist,
+                Img = info.Img,
+                SubscribeNumber = 0, 
+                CreatedDate = DateTime.UtcNow,
+            };
+
+            return artist;
+        }
         public SingerInfoDataTransfer ConvertArtistToDTO(Artist artist)
         {
             return _mapper.Map<SingerInfoDataTransfer>(artist);

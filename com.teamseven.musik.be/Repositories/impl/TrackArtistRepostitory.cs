@@ -46,6 +46,11 @@ namespace com.teamseven.musik.be.Repositories.impl
             _context.TrackArtists.Update(trackArtist);
             await _context.SaveChangesAsync();
         }
+
+        public async Task<TrackArtist?> FindTrackArtistAsync(int trackId)
+        {
+            return _context.TrackArtists.FirstOrDefault(a => a.TrackId == trackId);
+        }
     }
 }
 

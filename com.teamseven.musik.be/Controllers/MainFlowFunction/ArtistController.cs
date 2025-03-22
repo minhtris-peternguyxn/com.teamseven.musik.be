@@ -1,4 +1,5 @@
-﻿using com.teamseven.musik.be.Models.RequestDTO;
+﻿using com.teamseven.musik.be.Models.DataTranfers;
+using com.teamseven.musik.be.Models.RequestDTO;
 using com.teamseven.musik.be.Repositories.interfaces;
 using com.teamseven.musik.be.Services.Authentication;
 using com.teamseven.musik.be.Services.Interfaces;
@@ -23,7 +24,7 @@ namespace com.teamseven.musik.be.Controllers.MainFlowFunction
 
         [HttpPost]
         [Authorize(Policy = "SaleStaffPolicy")] //staff role to access
-        public async Task<IActionResult> AddArtist([FromBody] SingerInfoDataTransfer artist)
+        public async Task<IActionResult> AddArtist([FromBody] ArtistRequest artist)
         {
             if (artist == null)
             {

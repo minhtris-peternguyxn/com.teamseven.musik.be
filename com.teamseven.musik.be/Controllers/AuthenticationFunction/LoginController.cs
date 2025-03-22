@@ -1,5 +1,6 @@
 ﻿using com.teamseven.musik.be.Services.Authentication;
 using com.teamseven.musik.be.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
@@ -47,6 +48,25 @@ namespace com.teamseven.musik.be.Controllers
                 return StatusCode(500, new { message = "Internal server error.", error = ex.Message });
             }
         }
+
+        [HttpPost("test")]
+        [Authorize(Policy = "SaleStaffPolicy")]
+        public IActionResult Test()
+        {
+            var claims = User.Claims.Select(c => $"{c.Type}: {c.Value}");
+            Console.WriteLine("User Claims: " + string.Join(", ", claims));
+            return Ok("Success");
+        }
+
+        [HttpPost("test-no-policy")]
+        [Authorize] // Chỉ cần xác thực, không cần policy
+        public IActionResult TestNoPolicy()
+        {
+            var claims = User.Claims.Select(c => $"{c.Type}: {c.Value}");
+            Console.WriteLine("User Claims: " + string.Join(", ", claims));
+            return Ok("Success");
+        }
+
     }
     public class LoginRequest
     {

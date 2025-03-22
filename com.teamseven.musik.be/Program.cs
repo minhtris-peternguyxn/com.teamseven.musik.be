@@ -6,18 +6,17 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.AspNetCore.Authentication;
 using com.teamseven.musik.be.Models.Contexts;
-using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.Authentication;
+using System.Security.Claims;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // ================= CẤU HÌNH DB =================
 builder.Services.AddDbContext<MusikDbContext>(options =>
-options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-//h xài mysql rồi :))
-
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // ================= CẤU HÌNH AUTHENTICATION =================
 ConfigureAuthentication(builder.Services, builder.Configuration);
@@ -41,9 +40,38 @@ builder.Services.AddCors(options =>
     });
 });
 builder.WebHost.UseUrls("https://0.0.0.0:5000");
+
 // ================= CẤU HÌNH SWAGGER =================
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
+
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        In = ParameterLocation.Header,
+        Description = "Vui lòng nhập Bearer Token (VD: Bearer eyJhbGciOi...)",
+        Name = "Authorization",
+        Type = SecuritySchemeType.Http,
+        Scheme = "bearer",
+        BearerFormat = "JWT"
+    });
+
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                }
+            },
+            new string[] { }
+        }
+    });
+});
 
 // ================= CẤU HÌNH AUTOMAPPER =================
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
@@ -69,31 +97,42 @@ app.Run();
 // ================= HÀM CẤU HÌNH AUTHENTICATION =================
 void ConfigureAuthentication(IServiceCollection services, IConfiguration config)
 {
-    // JWT Authentication
-    services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-        .AddJwtBearer(options =>
-        {
-            options.TokenValidationParameters = new TokenValidationParameters
-            {
-                ValidateIssuer = false,
-                ValidateAudience = false,
-                ValidateLifetime = false, // Không yêu cầu xác thực Lifetime cho app nghe nhạc
-                ValidateIssuerSigningKey = true,
-                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("cr7-is-the-goat"))
-            };
-        });
-    // Add Authorization policies
-    builder.Services.AddAuthorization(options =>
+    // Lấy khóa JWT từ appsettings.json
+    var jwtKey = config["Jwt:Key"];
+    if (string.IsNullOrEmpty(jwtKey))
     {
-        options.AddPolicy("DeliveringStaffPolicy", policy => policy.RequireClaim("role", "Admin"));
-        options.AddPolicy("SaleStaffPolicy", policy => policy.RequireClaim("role", "Staff"));
-    });
+        throw new InvalidOperationException("JWT Key is missing in configuration.");
+    }
 
-    // Google Authentication
+    // JWT Authentication
     services.AddAuthentication(options =>
     {
-        options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-        options.DefaultChallengeScheme = GoogleDefaults.AuthenticationScheme;
+        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    })
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = false,
+            ValidateAudience = false,
+            ValidateLifetime = false, // Không kiểm tra hết hạn
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey)) // Dùng khóa từ config
+        };
+        options.Events = new JwtBearerEvents
+        {
+            OnAuthenticationFailed = context =>
+            {
+                Console.WriteLine("JWT Authentication failed: " + context.Exception.Message);
+                return Task.CompletedTask;
+            },
+            OnTokenValidated = context =>
+            {
+                Console.WriteLine("JWT Token validated successfully.");
+                return Task.CompletedTask;
+            }
+        };
     })
     .AddCookie()
     .AddGoogle(googleOptions =>
@@ -103,5 +142,12 @@ void ConfigureAuthentication(IServiceCollection services, IConfiguration config)
         googleOptions.SaveTokens = true;
         googleOptions.ClaimActions.MapJsonKey("urn:google:picture", "picture", "url");
         googleOptions.ClaimActions.MapJsonKey("urn:google:locale", "locale", "string");
+    });
+
+    // Authorization policies
+    services.AddAuthorization(options =>
+    {
+        options.AddPolicy("DeliveringStaffPolicy", policy => policy.RequireClaim(ClaimTypes.Role, "Admin"));
+        options.AddPolicy("SaleStaffPolicy", policy => policy.RequireClaim(ClaimTypes.Role, "Staff"));
     });
 }

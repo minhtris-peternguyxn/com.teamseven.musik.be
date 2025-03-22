@@ -1,13 +1,8 @@
 ﻿namespace com.teamseven.musik.be.Models.RequestDTO
 {
-    public class GenreDataTransfer
+    public class GenreRequest
     {
-        public int GenreId { get; set; }
-
         public string? GenreName { get; set; }
-
-        public DateTime CreatedDate { get; set; }
-
         public string? Img { get; set; }
 
     }

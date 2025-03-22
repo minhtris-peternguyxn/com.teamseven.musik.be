@@ -4,7 +4,7 @@ namespace com.teamseven.musik.be.Repositories.interfaces
 {
     public interface IGenreRepository
     {
-        Task<Genre> GetGenreAsync(int id);
+        Task<Genre?> GetGenreAsync(int id);
         Task<IEnumerable<Genre>> GetGenresByNameAsync(string name);
 
         Task AddGenreAsync(Genre genre);
@@ -14,6 +14,8 @@ namespace com.teamseven.musik.be.Repositories.interfaces
         Task DeleteGenreAsync(int id);
 
         Task<IEnumerable<Genre>> GetAllGenreAsync();
+
+        Task<Boolean> CheckGenresExitstAsync(string name);
 
     }
 }

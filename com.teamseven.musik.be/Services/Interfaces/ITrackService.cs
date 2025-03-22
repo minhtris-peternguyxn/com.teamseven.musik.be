@@ -12,7 +12,7 @@ namespace com.teamseven.musik.be.Services.Interfaces
 
         Task<IEnumerable<Track>> GetTracksByIdsAsync(List<int> ids);
 
-        Task DeleteTrackAsync(int id, string token);
+        Task DeleteTrackAsync(int id);
 
         Task<IEnumerable<Track>> GetAllTracksAsync();
 
@@ -26,7 +26,7 @@ namespace com.teamseven.musik.be.Services.Interfaces
 
         Task<IEnumerable<Track>> ListTracksLast7DaysAsync();
 
-        Task UpdateTrackAsync(TrackDataTransfer trackUpdate);
+        Task UpdateTrackAsync(TrackUpdateRequest trackUpdate);
 
 
         Task AddTrackToAlbumAsync(TrackAlbum trackAlbum);

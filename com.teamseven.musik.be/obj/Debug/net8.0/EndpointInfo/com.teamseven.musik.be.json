@@ -1,8 +1,8 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "com.teamseven.musik.be",
-    "version": "1.0"
+    "title": "My API",
+    "version": "v1"
   },
   "paths": {
     "/api/albums": {
@@ -385,17 +385,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/SingerInfoDataTransfer"
+                "$ref": "#/components/schemas/ArtistRequest"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/SingerInfoDataTransfer"
+                "$ref": "#/components/schemas/ArtistRequest"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/SingerInfoDataTransfer"
+                "$ref": "#/components/schemas/ArtistRequest"
               }
             }
           }
@@ -502,17 +502,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/GenreDataTransfer"
+                "$ref": "#/components/schemas/GenreRequest"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/GenreDataTransfer"
+                "$ref": "#/components/schemas/GenreRequest"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/GenreDataTransfer"
+                "$ref": "#/components/schemas/GenreRequest"
               }
             }
           }
@@ -592,6 +592,30 @@
             }
           }
         },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Login/test": {
+      "post": {
+        "tags": [
+          "Login"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Login/test-no-policy": {
+      "post": {
+        "tags": [
+          "Login"
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -726,17 +750,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/TrackDataTransfer"
+                "$ref": "#/components/schemas/TrackUpdateRequest"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/TrackDataTransfer"
+                "$ref": "#/components/schemas/TrackUpdateRequest"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/TrackDataTransfer"
+                "$ref": "#/components/schemas/TrackUpdateRequest"
               }
             }
           }
@@ -1172,20 +1196,31 @@
         },
         "additionalProperties": false
       },
-      "GenreDataTransfer": {
+      "ArtistRequest": {
         "type": "object",
         "properties": {
-          "genreId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "genreName": {
+          "artistName": {
             "type": "string",
             "nullable": true
           },
-          "createdDate": {
+          "verifiedArtist": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "img": {
             "type": "string",
-            "format": "date-time"
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "GenreRequest": {
+        "type": "object",
+        "properties": {
+          "genreName": {
+            "type": "string",
+            "nullable": true
           },
           "img": {
             "type": "string",
@@ -1240,38 +1275,6 @@
         },
         "additionalProperties": false
       },
-      "SingerInfoDataTransfer": {
-        "type": "object",
-        "properties": {
-          "artistId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "artistName": {
-            "type": "string",
-            "nullable": true
-          },
-          "verifiedArtist": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "subscribeNumber": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "createdDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "img": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
       "TrackAlbum": {
         "type": "object",
         "properties": {
@@ -1298,39 +1301,12 @@
             "format": "int32",
             "nullable": true
           },
-          "createdDate": {
-            "type": "string",
-            "format": "date-time"
-          },
           "img": {
             "type": "string",
             "nullable": true
           },
           "trackBlobsLink": {
             "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "TrackDataTransfer": {
-        "type": "object",
-        "properties": {
-          "trackId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "trackName": {
-            "type": "string",
-            "nullable": true
-          },
-          "trackBlobsLink": {
-            "type": "string",
-            "nullable": true
-          },
-          "duration": {
-            "type": "integer",
-            "format": "int32",
             "nullable": true
           },
           "artistIds": {
@@ -1341,24 +1317,12 @@
             },
             "nullable": true
           },
-          "genreIds": {
+          "genresIds": {
             "type": "array",
             "items": {
               "type": "integer",
               "format": "int32"
             },
-            "nullable": true
-          },
-          "albumIds": {
-            "type": "array",
-            "items": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "nullable": true
-          },
-          "img": {
-            "type": "string",
             "nullable": true
           }
         },
@@ -1374,6 +1338,33 @@
           "genreId": {
             "type": "integer",
             "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "TrackUpdateRequest": {
+        "type": "object",
+        "properties": {
+          "trackId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "trackName": {
+            "type": "string",
+            "nullable": true
+          },
+          "duration": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "img": {
+            "type": "string",
+            "nullable": true
+          },
+          "trackBlobsLink": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -1401,6 +1392,19 @@
         },
         "additionalProperties": false
       }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "http",
+        "description": "Vui lòng nhập Bearer Token (VD: Bearer eyJhbGciOi...)",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
     }
-  }
+  },
+  "security": [
+    {
+      "Bearer": [ ]
+    }
+  ]
 }

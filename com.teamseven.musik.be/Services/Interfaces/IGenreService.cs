@@ -7,11 +7,10 @@ namespace com.teamseven.musik.be.Services.Interfaces
 {
     public interface IGenreService
     {
-        Genre ConvertGenreDTO(GenreDataTransfer data);
-        GenreDataTransfer GetGenreEntityToDTO(Genre genre);
-        Task AddGenreAsync(GenreDataTransfer genre);
+        GenreRequest GetGenreEntityToDTO(Genre genre);
+        Task AddGenreAsync(GenreRequest genre);
         Task<IEnumerable<Genre>> ListAllGenre();
-        Task<Genre> GetOneGenre(int id);
+        Task<Genre?> GetOneGenre(int id);
         Task RemoveGenre(int id);
     }
 }

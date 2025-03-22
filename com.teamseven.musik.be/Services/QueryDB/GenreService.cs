@@ -19,28 +19,32 @@ namespace com.teamseven.musik.be.Services.QueryDB
             _mapper = mapper;
         }
 
-        public Genre ConvertGenreDTO(GenreDataTransfer data)
+        public Genre ConvertGenreDTO(GenreRequest data)
         {
             return _mapper.Map<Genre>(data);
         }
 
-        public GenreDataTransfer GetGenreEntityToDTO(Genre genre)
+        public GenreRequest GetGenreEntityToDTO(Genre genre)
         {
-            return _mapper.Map<GenreDataTransfer>(genre);
+            return _mapper.Map<GenreRequest>(genre);
         }
 
-        public async Task AddGenreAsync(GenreDataTransfer genre)
+        public async Task AddGenreAsync(GenreRequest genre)
         {
             // Check if genre exists
-            var tmp = await _repo.GetGenresByNameAsync(genre.GenreName);
-            if (tmp != null)
-            {
-                throw new InvalidOperationException("Genre already exists.");
-            }
+            if(genre == null) throw new ArgumentNullException(nameof(genre));
 
-            // Convert DTO to entity and add to repository
-            Genre genreEntity = ConvertGenreDTO(genre);
-            await _repo.AddGenreAsync(genreEntity);
+            if (await _repo.CheckGenresExitstAsync(genre.GenreName))
+                  throw new InvalidOperationException("Genre already exists.");
+            //map cc phế vl
+            Genre g = new Genre()
+            {
+                GenreName = genre.GenreName,
+                Img = genre.Img,
+                CreatedDate = DateTime.UtcNow
+            };
+
+            await _repo.AddGenreAsync(g);
         }
 
         public async Task<IEnumerable<Genre>> ListAllGenre()
@@ -48,7 +52,7 @@ namespace com.teamseven.musik.be.Services.QueryDB
             return await _repo.GetAllGenreAsync();
         }
 
-        public async Task<Genre> GetOneGenre(int id)
+        public async Task<Genre?> GetOneGenre(int id)
         {
             return await _repo.GetGenreAsync(id);
         }

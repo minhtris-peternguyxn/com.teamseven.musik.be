@@ -31,7 +31,7 @@ namespace com.teamseven.musik.be.Controllers.MainFlowFunction
         // POST: Add new genre
         [HttpPost]
         [Authorize(Policy = "SaleStaffPolicy")]
-        public async Task<IActionResult> AddNewGenre([FromBody] GenreDataTransfer data)
+        public async Task<IActionResult> AddNewGenre([FromBody] GenreRequest data)
         {
             await _service.AddGenreAsync(data);
             return Ok("Add new genre successfully");

@@ -43,48 +43,75 @@ namespace com.teamseven.musik.be.Services.QueryDB
 
 
 
-        public async Task AddTrackAsync(TrackDataTransfer track)
+        public async Task AddTrackAsync(TrackCreateRequest trackRequest)
         {
-            if (track == null)
+            if (trackRequest == null)
             {
-                throw new ArgumentNullException(nameof(track), "Track information is required.");
+                throw new ArgumentNullException(nameof(trackRequest), "Track information is required.");
             }
 
-            // Gán thông tin mặc định
-            List<TrackAlbum> albums = new List<TrackAlbum>();
-            List<TrackArtist> artists = new List<TrackArtist>();
-            List<TrackGenre> genres = new List<TrackGenre>();
+            ValidateTrackInput(trackRequest);
 
-            // add track and get id
-            var trackEntity = ConvertToTrackEntity(track);
+            // check exist
+            if (trackRequest.GenresIds?.Any() == true)
+            {
+                foreach (var genreId in trackRequest.GenresIds)
+                {
+                    if (await _genreRepository.GetGenreAsync(genreId) == null)
+                    {
+                        throw new ArgumentException($"Genre ID {genreId} not found.");
+                    }
+                }
+            }
+
+            if (trackRequest.ArtistIds?.Any() == true)
+            {
+                foreach (var artistId in trackRequest.ArtistIds)
+                {
+                    if (await _tartistRepository.FindTrackArtistAsync(artistId) == null)
+                    {
+                        throw new ArgumentException($"Artist ID {artistId} not found.");
+                    }
+                }
+            }
+
+            // 
+            var trackEntity = new Track
+            {
+                TrackName = trackRequest.TrackName,
+                Duration = trackRequest.Duration,
+                Img = trackRequest.Img,
+                TrackBlobsLink = trackRequest.TrackBlobsLink,
+                CreatedDate = DateTime.UtcNow,
+                TotalLikes = 0,
+                TotalViews = 0
+            };
+
             await _trackRepository.AddTrackAsync(trackEntity);
-            int trackId = trackEntity.TrackId;
 
-            // Lưu các liên kết vào bảng nhiều-nhiều
-            //foreach (var albumId in track.AlbumIds)
-            //{
-            //    var trackAlbum = new TrackAlbum { TrackId = trackId, AlbumId = albumId };
-            //    await _talbumRepository.AddTrackAlbumAsync(trackAlbum);
-            //}
+            // track genre
+            if (trackRequest.GenresIds?.Any() == true)
+            {
+                foreach (var genreId in trackRequest.GenresIds)
+                {
+                    await _tgenreRepository.AddTrackGenreAsync(new TrackGenre(trackEntity.TrackId, genreId));
+                }
+            }
 
-            //foreach (var artistId in track.ArtistIds)
-            //{
-            //    var trackArtist = new TrackArtist { TrackId = trackId, ArtistId = artistId };
-            //    await _tartistRepository.AddTrackArtistAsync(trackArtist);
-            //}
-
-            //foreach (var genreId in track.GenreIds)
-            //{
-            //    var trackGenre = new TrackGenre { TrackId = trackId, GenreId = genreId };
-            //    await _tgenreRepository.AddTrackGenreAsync(trackGenre);
-            //}
+            // track artist
+            if (trackRequest.ArtistIds?.Any() == true)
+            {
+                foreach (var artistId in trackRequest.ArtistIds)
+                {
+                    await _tartistRepository.AddTrackArtistAsync(new TrackArtist(trackEntity.TrackId, artistId));
+                }
+            }
         }
 
 
         public async Task<IEnumerable<Track>> GetTracksByIdsAsync(List<int> ids)
         {
-            await _trackRepository.ListTracksByIdsAsync(ids);
-            return null;
+          return  await _trackRepository.ListTracksByIdsAsync(ids);
         }
 
 
@@ -98,13 +125,8 @@ namespace com.teamseven.musik.be.Services.QueryDB
         //    await _trackRepository.UpdateTrackAsync(track);
         //}
 
-        public async Task DeleteTrackAsync(int id, string token)
+        public async Task DeleteTrackAsync(int id)
         {
-            if (!_tokenService.IsUserInRole(token, "Admin"))
-            {
-                throw new UnauthorizedAccessException("Users are not allowed to perform this action.");
-            }
-
             await _trackRepository.DeleteTrackAsync(id);
         }
 
@@ -126,24 +148,29 @@ namespace com.teamseven.musik.be.Services.QueryDB
         public async Task<IEnumerable<Track>> ListTracksLast7DaysAsync() =>
             await _trackRepository.ListTrackLast7Days();
 
-        public async Task UpdateTrackAsync(TrackDataTransfer trackUpdate)
+        public async Task UpdateTrackAsync(TrackUpdateRequest trackUpdate)
         {
             if (trackUpdate == null)
             {
                 throw new ArgumentNullException(nameof(trackUpdate), "Track information is required.");
             }
 
-            // GET TRACK FROM DB
+            // check exist
             var existingTrack = await _trackRepository.GetByIdAsync(trackUpdate.TrackId);
             if (existingTrack == null)
             {
                 throw new KeyNotFoundException($"Track with ID {trackUpdate.TrackId} not found.");
             }
 
-            //UPDATE NEW INFO
+            // update 
             if (!string.IsNullOrWhiteSpace(trackUpdate.TrackName))
             {
                 existingTrack.TrackName = trackUpdate.TrackName;
+            }
+
+            if (!string.IsNullOrWhiteSpace(trackUpdate.Img))
+            {
+                existingTrack.Img = trackUpdate.Img;
             }
 
             if (!string.IsNullOrWhiteSpace(trackUpdate.TrackBlobsLink))
@@ -156,23 +183,7 @@ namespace com.teamseven.musik.be.Services.QueryDB
                 existingTrack.Duration = trackUpdate.Duration.Value;
             }
 
-            //update many-many components
-            if (trackUpdate.AlbumIds.Any())
-            {
-                for (int i = 0; i < trackUpdate.AlbumIds.Count; i++)
-                {
-                    await _talbumRepository.Update(new TrackAlbum(trackUpdate.TrackId, trackUpdate.AlbumIds[i]));
-                }
-            }
-
-            //if (trackUpdate.ArtistIds.Any())
-            //{
-            //    _tartistRepository.Update(new TrackArtist(trackUpdate.TrackId, trackUpdate.Ar));
-            //}
-
-            //        trackUpdate.GenreIds
-
-            // Lưu các thay đổi vào database
+            // save async
             await _trackRepository.UpdateTrackAsync(existingTrack);
         }
 
@@ -242,20 +253,20 @@ namespace com.teamseven.musik.be.Services.QueryDB
             await _tgenreRepository.RemoveTrackGenreAsync(trackId, genreId);
         }
 
-        public async Task AddTrackAsync(TrackCreateRequest track)
-        {
-            if (track == null)
-            {
-                throw new ArgumentNullException(nameof(track), "Track information is required.");
-            }
+        //public async Task AddTrackAsync(TrackCreateRequest track)
+        //{
+        //    if (track == null)
+        //    {
+        //        throw new ArgumentNullException(nameof(track), "Track information is required.");
+        //    }
 
-            // Validate 
-            ValidateTrackInput(track);
+        //    // Validate 
+        //    ValidateTrackInput(track);
 
-            // Chuyển đổi DTO sang entity và thêm vào repository
-            var trackEntity = _mapper.Map<Track>(track);
-            await _trackRepository.AddTrackAsync(trackEntity);
-        }
+        //    // Chuyển đổi DTO sang entity và thêm vào repository
+        //    var trackEntity = _mapper.Map<Track>(track);
+        //    await _trackRepository.AddTrackAsync(trackEntity);
+        //}
 
         // Phương thức validation riêng
         private void ValidateTrackInput(TrackCreateRequest track)
