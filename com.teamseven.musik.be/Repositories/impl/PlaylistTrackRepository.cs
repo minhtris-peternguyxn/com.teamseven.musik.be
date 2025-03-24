@@ -19,6 +19,26 @@ namespace com.teamseven.musik.be.Repositories.impl
 
         public async Task AddPlaylistTrackAsync(PlaylistTrack playlistTrack)
         {
+            if (playlistTrack == null)
+                throw new ArgumentNullException(nameof(playlistTrack), "PlaylistTrack cannot be null.");
+
+            // check conditions
+            var playlistExists = await _context.Playlists
+                .AnyAsync(p => p.PlaylistId == playlistTrack.PlaylistId);
+            if (!playlistExists)
+                throw new KeyNotFoundException($"Playlist with PlaylistId {playlistTrack.PlaylistId} not found.");
+
+            var trackExists = await _context.Tracks
+                .AnyAsync(t => t.TrackId == playlistTrack.TrackId);
+            if (!trackExists)
+                throw new KeyNotFoundException($"Track with TrackId {playlistTrack.TrackId} not found.");
+
+            // check duplicate
+            var exists = await _context.PlaylistTracks
+                .AnyAsync(pt => pt.PlaylistId == playlistTrack.PlaylistId && pt.TrackId == playlistTrack.TrackId);
+            if (exists)
+                return;
+
             await _context.PlaylistTracks.AddAsync(playlistTrack);
             await _context.SaveChangesAsync();
         }
@@ -36,7 +56,8 @@ namespace com.teamseven.musik.be.Repositories.impl
 
         public async Task RemovePlaylistTrackAsync(int playlistId, int trackId)
         {
-            var playlistTrack = await GetPlaylistTrackAsync(playlistId, trackId);
+            var playlistTrack = await _context.PlaylistTracks
+                .FirstOrDefaultAsync(pt => pt.PlaylistId == playlistId && pt.TrackId == trackId);
             if (playlistTrack != null)
             {
                 _context.PlaylistTracks.Remove(playlistTrack);
@@ -44,10 +65,22 @@ namespace com.teamseven.musik.be.Repositories.impl
             }
         }
 
-        public async Task Update(PlaylistTrack playlistTrack)
+        public async Task<IEnumerable<Track>?> GetAllTrackInPlaylist(int playlistId)
         {
-            _context.PlaylistTracks.Update(playlistTrack);
-            await _context.SaveChangesAsync();
+            // check exist
+            var playlistExists = await _context.Playlists.AnyAsync(p => p.PlaylistId == playlistId);
+            if (!playlistExists)
+                throw new KeyNotFoundException($"Playlist with PlaylistId {playlistId} not found.");
+
+            return await _context.PlaylistTracks
+                .Where(pt => pt.PlaylistId == playlistId)
+                .Join(
+                    _context.Tracks,
+                    pt => pt.TrackId,
+                    t => t.TrackId,
+                    (pt, t) => t
+                )
+                .ToListAsync();
         }
     }
 }

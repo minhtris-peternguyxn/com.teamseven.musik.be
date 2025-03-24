@@ -13,5 +13,7 @@ namespace com.teamseven.musik.be.Repositories.interfaces
 
         Task<IEnumerable<Artist>> ListAllArtists();
 
+        Task<bool> ArtistExistAsync(int id);
+
     }
 }

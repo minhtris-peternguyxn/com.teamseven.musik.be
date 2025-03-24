@@ -18,4 +18,8 @@ public partial class History
     public int? GenreId { get; set; }
 
     public virtual Genre? Genre { get; set; }
+
+    public virtual Track? Track { get; set; }
+
+    public virtual User? User { get; set; }
 }

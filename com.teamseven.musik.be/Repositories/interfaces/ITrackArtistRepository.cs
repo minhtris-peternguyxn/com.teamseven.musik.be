@@ -8,9 +8,12 @@
         Task AddTrackArtistAsync(TrackArtist trackArtist);
         Task RemoveTrackArtistAsync(int trackId, int artistId);
         Task<IEnumerable<TrackArtist>> GetAllTrackArtistsAsync();
-        Task Update (TrackArtist trackArtist);
 
-        Task<TrackArtist?> FindTrackArtistAsync(int trackId);
+        Task<TrackArtist?> FindTrackArtistAsync(int trackId, int artistId);
+
+        Task<IEnumerable<Artist>?> FindArtistInTrack(int trackId);
+
+        Task<IEnumerable<Track>?> FindTrackInArtist(int artistId);
     }
 
 }

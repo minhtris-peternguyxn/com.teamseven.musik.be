@@ -18,5 +18,11 @@ namespace com.teamseven.musik.be.Services.Interfaces
         Task<IEnumerable<Artist>> GetAllArtistsAsync();
 
         Task CreateNewArtistAsync(Artist artistEntity);
+
+        Task UpdateArtistAsync(Artist artistEntity);
+
+        Task DeleteArtistAsync(int id);
+
+        //Task<bool> GetArtistExist(int id);
     }
 }

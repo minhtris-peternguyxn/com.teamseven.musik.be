@@ -9,17 +9,8 @@
         Task AddAlbumArtistAsync(AlbumArtist albumArtist);
         Task<IEnumerable<AlbumArtist>> GetAllAlbumArtistsAsync();
         Task<AlbumArtist?> GetAlbumArtistAsync(int albumId, int artistId);
-
-        //Task<IEnumerable<int>> GetArtistsInAlbumAsync(int albumId);
-
-        Task<IEnumerable<AlbumArtist>> GetArtistsInAlbumAsync(int albumId);
-
-        Task<IEnumerable<AlbumArtist>> GetAlbumWithArtistIdAsync(int artistId);
-
-
+        Task<IEnumerable<Artist>?> GetArtistsInAlbumAsync(int albumId);
+        Task<IEnumerable<Album>?> GetAlbumWithArtistIdAsync(int artistId);
         Task RemoveAlbumArtistAsync(int albumId, int artistId);
-
-        Task Update (AlbumArtist albumArtist);
     }
-
 }

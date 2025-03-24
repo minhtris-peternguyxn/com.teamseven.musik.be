@@ -8,7 +8,7 @@ namespace com.teamseven.musik.be.Repositories.interfaces
     {
         Task<IEnumerable<Album>> GetAllAlbumsAsync();
 
-        Task<IEnumerable<Album>> GetAlbumByNameAsync(string name);
+        Task<IEnumerable<Album>?> GetAlbumByNameAsync(string name);
 
         Task<Album?> GetAlbumByIdAsync(int albumId);
         Task AddAlbumAsync(Album album);

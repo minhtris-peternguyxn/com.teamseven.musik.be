@@ -8,7 +8,9 @@
         Task AddTrackGenreAsync(TrackGenre trackGenre);
         Task RemoveTrackGenreAsync(int trackId, int genreId);
         Task<IEnumerable<TrackGenre>> GetAllTrackGenresAsync();
-        Task Update (TrackGenre trackGenre);
+
+        Task<IEnumerable<Track>> GetTracksInGenreAsync(int genreId);
+        //Task Update (TrackGenre trackGenre);
     }
 
 }

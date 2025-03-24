@@ -1,4 +1,5 @@
 ﻿using com.teamseven.musik.be.Models.DataTranfers;
+using com.teamseven.musik.be.Models.Entities;
 using com.teamseven.musik.be.Models.RequestDTO;
 using com.teamseven.musik.be.Repositories.interfaces;
 using com.teamseven.musik.be.Services.Authentication;
@@ -47,6 +48,29 @@ namespace com.teamseven.musik.be.Controllers.MainFlowFunction
             }
         }
 
+        [HttpPut]
+        [Authorize(Policy = "SaleStaffPolicy")] //staff role to access
+        public async Task<IActionResult> ModifyArtist([FromBody] Artist artist)
+        {
+            if (artist == null)
+            {
+                return BadRequest("Artist cannot be null.");
+            }
+
+            try
+            {
+                await _singService.UpdateArtistAsync(artist);
+                return Ok(new { message = "Artist updated successfully." });
+            }
+            catch (ArgumentNullException)
+            {
+                return BadRequest(new { message = "Artist conversion failed: Artist data is null." });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = $"An error occurred: {ex.Message}" });
+            }
+        }
         // READ: Get all artists
         [HttpGet]
         public async Task<IActionResult> GetAllArtists()

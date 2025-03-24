@@ -6,14 +6,12 @@ namespace com.teamseven.musik.be.Models.Entities;
 public partial class Playlist
 {
     public int PlaylistId { get; set; }
-
-    public string? PlaylistName { get; set; }
-
-    public int? UserId { get; set; }
-
+    public string PlaylistName { get; set; }
     public DateTime CreatedDate { get; set; }
+    public int UserId { get; set; }
 
-    public virtual ICollection<Podcast> Podcasts { get; set; } = new List<Podcast>();
-
-    public virtual User? User { get; set; }
+    // Navigation properties
+    public User User { get; set; }
+    public ICollection<PlaylistTrack> PlaylistTracks { get; set; } = new List<PlaylistTrack>();
+    public ICollection<Podcast> Podcasts { get; set; } = new List<Podcast>();
 }

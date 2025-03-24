@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace com.teamseven.musik.be.Models.Entities;
+﻿namespace com.teamseven.musik.be.Models.Entities;
 
 public partial class AlbumArtist
 {
+    public AlbumArtist() { }
     public AlbumArtist(int albumId, int artistId)
     {
         AlbumId = albumId;
@@ -12,6 +10,9 @@ public partial class AlbumArtist
     }
 
     public int AlbumId { get; set; }
-
     public int ArtistId { get; set; }
+
+    // Navigation properties
+    public Album Album { get; set; }
+    public Artist Artist { get; set; }
 }

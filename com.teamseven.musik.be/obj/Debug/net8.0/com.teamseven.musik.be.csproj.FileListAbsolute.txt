@@ -223,9 +223,7 @@ C:\com.teamseven.musik.be\com.teamseven.musik.be\bin\Debug\net8.0\Microsoft.Iden
 C:\com.teamseven.musik.be\com.teamseven.musik.be\bin\Debug\net8.0\Microsoft.OpenApi.dll
 C:\com.teamseven.musik.be\com.teamseven.musik.be\bin\Debug\net8.0\Microsoft.SqlServer.Server.dll
 C:\com.teamseven.musik.be\com.teamseven.musik.be\bin\Debug\net8.0\Mono.TextTemplating.dll
-C:\com.teamseven.musik.be\com.teamseven.musik.be\bin\Debug\net8.0\MySqlConnector.dll
 C:\com.teamseven.musik.be\com.teamseven.musik.be\bin\Debug\net8.0\Newtonsoft.Json.dll
-C:\com.teamseven.musik.be\com.teamseven.musik.be\bin\Debug\net8.0\Pomelo.EntityFrameworkCore.MySql.dll
 C:\com.teamseven.musik.be\com.teamseven.musik.be\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
 C:\com.teamseven.musik.be\com.teamseven.musik.be\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\com.teamseven.musik.be\com.teamseven.musik.be\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll

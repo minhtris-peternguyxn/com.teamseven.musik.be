@@ -13,10 +13,12 @@ namespace com.teamseven.musik.be.Controllers.MainFlowFunction
     public class AlbumController : ControllerBase
     {
         private readonly IAlbumService _albumService;
+        private readonly ITrackService _trackService;
 
-        public AlbumController(IAlbumService albumService)
+        public AlbumController(IAlbumService albumService, ITrackService trackService)
         {
             _albumService = albumService;
+            _trackService = trackService;
         }
 
         // GET: GET ALL ALBUMS
@@ -51,7 +53,7 @@ namespace com.teamseven.musik.be.Controllers.MainFlowFunction
         [AllowAnonymous]
         public async Task<IActionResult> GetAlbumArtists(int id)
         {
-            var artists = await _albumService.GetAlbumArtistsByAlbumIdAsync(id);
+            var artists = await _albumService.GetArtistsInAlbumAsync(id);
             return artists != null && artists.Any() ? Ok(artists) : NotFound(new { message = "No artists found for this album." });
         }
 
@@ -60,7 +62,7 @@ namespace com.teamseven.musik.be.Controllers.MainFlowFunction
         [AllowAnonymous]
         public async Task<IActionResult> GetTracksInAlbum(int id)
         {
-            var tracks = await _albumService.GetTrackInAlbumByAlbumIdAsync(id);
+            var tracks = await _trackService.ListTracksByAlbumAsync(id);
             return tracks != null && tracks.Any() ? Ok(tracks) : NotFound(new { message = "No tracks found for this album." });
         }
 
@@ -72,11 +74,27 @@ namespace com.teamseven.musik.be.Controllers.MainFlowFunction
             try
             {
                 await _albumService.CreateNewAlbum(album);
-                return NoContent();
+                return Ok("Album created successfully.");
+            }
+            catch (ArgumentNullException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(ex.Message);
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new { message = "An error occurred while creating the album.", error = ex.Message });
+                return StatusCode(500, $"An error occurred: {ex.Message}");
             }
         }
 
@@ -87,7 +105,7 @@ namespace com.teamseven.musik.be.Controllers.MainFlowFunction
         {
             try
             {
-                await _albumService.UpdateAlbum(album);
+                await _albumService.UpdateAlbumAsync(album);
                 return NoContent();
             }
             catch (Exception ex)
@@ -119,7 +137,10 @@ namespace com.teamseven.musik.be.Controllers.MainFlowFunction
         {
             try
             {
-                await _albumService.AddTracksToAlbum(tracks);
+                foreach (var track in tracks)
+                {
+                    await _trackService.AddTrackToAlbumAsync(track);
+                }    
                 return NoContent();
             }
             catch (Exception ex)
@@ -163,11 +184,11 @@ namespace com.teamseven.musik.be.Controllers.MainFlowFunction
         // DELETE: DELETE TRACK FROM ALBUM
         [HttpDelete("{id:int}/tracks")]
         [Authorize(Policy = "SaleStaffPolicy")]
-        public async Task<IActionResult> DeleteTrackFromAlbum(int id, [FromBody] TrackAlbum trackAlbum)
+        public async Task<IActionResult> DeleteTrackFromAlbum([FromBody] TrackAlbum trackAlbum)
         {
             try
             {
-                await _albumService.DeleteTrackAlbumAsync(trackAlbum);
+                await _trackService.RemoveTrackFromAlbumAsync(trackAlbum.TrackId, trackAlbum.AlbumId);
                 return NoContent();
             }
             catch (Exception ex)

@@ -4,6 +4,8 @@
     {
         public string? AlbumName { get; set; }
 
+        public required List<int> ArtistIds { get; set; }
+
         public DateTime? ReleaseDate { get; set; }
 
         public string? Img { get; set; }

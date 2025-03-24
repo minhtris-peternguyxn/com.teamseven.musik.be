@@ -32,7 +32,7 @@ namespace com.teamseven.musik.be.Repositories.impl
             
             return album;
         }
-        public async Task<IEnumerable<Album>> GetAlbumByNameAsync(string name)
+        public async Task<IEnumerable<Album>?> GetAlbumByNameAsync(string name)
         {
             var albums = await _context.Albums
                 .Where(a => a.AlbumName.Contains(name))

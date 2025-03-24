@@ -7,9 +7,7 @@
     {
         Task AddPlaylistTrackAsync(PlaylistTrack playlistTrack);
         Task RemovePlaylistTrackAsync(int playlistId, int trackId);
-        Task<IEnumerable<PlaylistTrack>> GetAllPlaylistTracksAsync();
-
-        Task Update(PlaylistTrack playlistTrack);
+        Task<IEnumerable<Track>?> GetAllTrackInPlaylist(int playlistId);
     }
 
 }

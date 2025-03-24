@@ -182,13 +182,13 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "id",
-        "Type": "System.Int32",
+        "Name": "trackAlbum",
+        "Type": "com.teamseven.musik.be.Models.Entities.TrackAlbum",
         "IsRequired": true
       },
       {
-        "Name": "trackAlbum",
-        "Type": "com.teamseven.musik.be.Models.Entities.TrackAlbum",
+        "Name": "id",
+        "Type": "",
         "IsRequired": true
       }
     ],
@@ -221,6 +221,22 @@
       {
         "Name": "artist",
         "Type": "com.teamseven.musik.be.Models.DataTranfers.ArtistRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "com.teamseven.musik.be.Controllers.MainFlowFunction.ArtistController",
+    "Method": "ModifyArtist",
+    "RelativePath": "api/artist",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "artist",
+        "Type": "com.teamseven.musik.be.Models.Entities.Artist",
         "IsRequired": true
       }
     ],

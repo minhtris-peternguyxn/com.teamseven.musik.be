@@ -27,5 +27,7 @@ public partial class User
 
     public int? NumberOfSubscriber { get; set; }
 
+    public virtual ICollection<History> Histories { get; set; } = new List<History>();
+
     public virtual ICollection<Playlist> Playlists { get; set; } = new List<Playlist>();
 }

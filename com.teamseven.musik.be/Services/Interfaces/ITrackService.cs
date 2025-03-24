@@ -8,7 +8,7 @@ namespace com.teamseven.musik.be.Services.Interfaces
 {
     public interface ITrackService
     {
-        Task AddTrackAsync(TrackCreateRequest track);
+        Task<int> AddTrackAsync(TrackCreateRequest track);
 
         Task<IEnumerable<Track>> GetTracksByIdsAsync(List<int> ids);
 
@@ -18,11 +18,11 @@ namespace com.teamseven.musik.be.Services.Interfaces
 
         Task<Track> GetTrackByIdAsync(int id);
 
-        Task<IEnumerable<TrackAlbum>> ListTracksByAlbumAsync(int albumId);
+        Task<IEnumerable<Track>?> ListTracksByAlbumAsync(int albumId);
 
-        Task<IEnumerable<TrackArtist>> ListTracksByArtistAsync(int artistId);
+        Task<IEnumerable<Track>?> ListTracksByArtistAsync(int artistId);
 
-        Task<IEnumerable<TrackGenre>> ListTracksByGenreAsync(int genreId);
+        Task<IEnumerable<Track>?> ListTracksByGenreAsync(int genreId);
 
         Task<IEnumerable<Track>> ListTracksLast7DaysAsync();
 
