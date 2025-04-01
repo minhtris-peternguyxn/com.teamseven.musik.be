@@ -11,13 +11,14 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.Authentication;
 using System.Security.Claims;
+using com.teamseven.musik.be.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // ================= CẤU HÌNH DB =================
 builder.Services.AddDbContext<MusikDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-
+builder.Services.AddHostedService<KeepAliveService>();
 // ================= CẤU HÌNH AUTHENTICATION =================
 ConfigureAuthentication(builder.Services, builder.Configuration);
 
