@@ -16,7 +16,7 @@
 	<ItemGroup>
 	  <None Include="Models\DataTranfers\BasicTrackRespone.cs" />
 	  <None Include="Models\DataTranfers\GenreRequest.cs" />
-	  <None Include="Services\BackgroundService.cs" />
+	  <None Include="Services\DatabaseKeepAliveMiddleware.cs" />
 	</ItemGroup>
 
 	<ItemGroup>

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("com.teamseven.musik.be")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a044592dc5d68c5455c86273c5c905a1f1c1d05c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d7e99508a049f95dc5b02a22e6344c696a304091")]
 [assembly: System.Reflection.AssemblyProductAttribute("com.teamseven.musik.be")]
 [assembly: System.Reflection.AssemblyTitleAttribute("com.teamseven.musik.be")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

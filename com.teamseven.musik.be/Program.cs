@@ -18,7 +18,6 @@ var builder = WebApplication.CreateBuilder(args);
 // ================= CẤU HÌNH DB =================
 builder.Services.AddDbContext<MusikDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-builder.Services.AddHostedService<KeepAliveService>();
 // ================= CẤU HÌNH AUTHENTICATION =================
 ConfigureAuthentication(builder.Services, builder.Configuration);
 
@@ -88,7 +87,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+app.UseDatabaseKeepAlive();
 app.UseCors("AllowAll");
 app.UseAuthentication();
 app.UseAuthorization();
