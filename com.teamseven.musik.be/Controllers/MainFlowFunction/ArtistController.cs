@@ -90,5 +90,17 @@ namespace com.teamseven.musik.be.Controllers.MainFlowFunction
 
             return Ok(artist);
         }
+
+        // READ: Get artist by name
+        [HttpGet("name/{name}")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetListArtistByName(string name)
+        {
+            var artist = await _singService.GetArtistByNameAsync(name);
+            if (artist == null)
+                return NotFound(new { message = "Artist not found." });
+
+            return Ok(artist);
+        }
     }
 }

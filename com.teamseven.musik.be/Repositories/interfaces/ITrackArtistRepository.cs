@@ -13,6 +13,8 @@
 
         Task<IEnumerable<Artist>?> FindArtistInTrack(int trackId);
 
+        Task<IEnumerable<string>?> FindArtistNameInTrack(int trackId);
+
         Task<IEnumerable<Track>?> FindTrackInArtist(int artistId);
     }
 

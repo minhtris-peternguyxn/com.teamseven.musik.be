@@ -5,7 +5,9 @@ namespace com.teamseven.musik.be.Repositories.interfaces
     public interface IArtistRepository
     {
         Task<Artist> GetArtistAsync(int id);
-        Task<Artist> GetArtistByNameAsync(string name);
+        Task<IEnumerable<Artist>?> GetArtistByNameAsync(string name);
+
+        Task<string> GetArtistNameByIdAsync(int id);
 
         Task AddArtistAsync(Artist artist);
 

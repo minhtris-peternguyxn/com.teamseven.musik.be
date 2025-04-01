@@ -468,6 +468,28 @@
         }
       }
     },
+    "/api/artist/name/{name}": {
+      "get": {
+        "tags": [
+          "Artist"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/login-oauth2/signin-google": {
       "get": {
         "tags": [

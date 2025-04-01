@@ -3,7 +3,9 @@ using com.teamseven.musik.be.Models.Contexts;
 using com.teamseven.musik.be.Models.Entities;
 using com.teamseven.musik.be.Repositories.interfaces;
 using Microsoft.EntityFrameworkCore;
+using System.Globalization;
 using System.Net.WebSockets;
+using System.Text;
 
 namespace com.teamseven.musik.be.Repositories.impl
 {
@@ -27,10 +29,12 @@ namespace com.teamseven.musik.be.Repositories.impl
             return await _context.Artists.FindAsync(id);
         }
 
-        public async Task<Artist?> GetArtistByNameAsync(string name)
-        {
-            return await _context.Artists.FirstOrDefaultAsync(a => a.ArtistName == name);
-        }
+        //public async Task<IEnumerable<Artist>?> GetArtistByNameAsync(string name)
+        //{
+        //    return await _context.Artists
+        //        .Where(a => a.ArtistName.Contains(name))
+        //        .ToListAsync();
+        //}
 
         public async Task UpdateArtistAsync(Artist artist)
         {
@@ -56,6 +60,43 @@ namespace com.teamseven.musik.be.Repositories.impl
             {
                 throw new InvalidOperationException($"Error checking artist existence for ID {id}.", ex);
             }
+        }
+
+        public async Task<string> GetArtistNameByIdAsync(int id)
+        {
+            var artist = await _context?.Artists.FirstOrDefaultAsync(a => a.ArtistId == id);
+            return artist?.ArtistName ?? string.Empty;
+        }
+
+        public async Task<IEnumerable<Artist>> GetArtistByNameAsync(string name)
+        {
+            if (string.IsNullOrEmpty(name))
+                return new List<Artist>();
+
+            // Chuẩn hóa chuỗi tìm kiếm
+            string normalizedSearch = RemoveDiacritics(name).ToLower();
+
+            return await _context.Artists
+                .Where(a => RemoveDiacritics(a.ArtistName).ToLower().Contains(normalizedSearch))
+                .ToListAsync();
+        }
+
+        // Hàm loại bỏ dấu
+        private string RemoveDiacritics(string text)
+        {
+            if (string.IsNullOrEmpty(text))
+                return text;
+
+            string normalizedString = text.Normalize(NormalizationForm.FormD);
+            StringBuilder stringBuilder = new StringBuilder();
+
+            foreach (char c in normalizedString)
+            {
+                if (CharUnicodeInfo.GetUnicodeCategory(c) != UnicodeCategory.NonSpacingMark)
+                    stringBuilder.Append(c);
+            }
+
+            return stringBuilder.ToString().Normalize(NormalizationForm.FormC);
         }
     }
 }

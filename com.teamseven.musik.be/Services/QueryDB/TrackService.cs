@@ -102,12 +102,19 @@ namespace com.teamseven.musik.be.Services.QueryDB
             }
         }
 
-        public async Task<IEnumerable<Track>> GetTracksByIdsAsync(List<int> ids)
+        public async Task<IEnumerable<BasicTrackRespone>> GetTracksByIdsAsync(List<int> ids)
         {
             if (ids == null || !ids.Any())
                 throw new ArgumentException("List of track IDs cannot be null or empty.", nameof(ids));
 
-            return await _trackRepository.ListTracksByIdsAsync(ids);
+            var tracks = await _trackRepository.ListTracksByIdsAsync(ids);
+
+            var respone = new List<BasicTrackRespone>();
+            foreach (var t in tracks)
+            {
+                respone.Add( await MapTrackToBasicTrackDataTransfer(t));
+            }
+            return respone;
         }
 
 
@@ -129,8 +136,17 @@ namespace com.teamseven.musik.be.Services.QueryDB
             await _trackRepository.DeleteTrackAsync(id);
         }
 
-        public async Task<IEnumerable<Track>> GetAllTracksAsync() =>
-            await _trackRepository.GetAllTracksAsync();
+        public async Task<IEnumerable<BasicTrackRespone>> GetAllTracksAsync()
+        {
+          var tracks =  await _trackRepository.GetAllTracksAsync();
+            var respone = new List<BasicTrackRespone>();
+            foreach (var t in tracks)
+            {
+                respone.Add(await MapTrackToBasicTrackDataTransfer(t));
+            }
+            return respone;
+        }
+          
 
         public async Task<Track> GetTrackByIdAsync(int id)
         {
@@ -284,5 +300,23 @@ namespace com.teamseven.musik.be.Services.QueryDB
                     throw new ArgumentException($"Invalid Artist IDs: {string.Join(", ", invalidArtistIds)}.");
             }
         }
+
+        // Method to map Track to BasicTrackDataTransfer
+        private async Task<BasicTrackRespone> MapTrackToBasicTrackDataTransfer(Track track)
+        {
+            // Get list artist
+            List<string> artistNames = (List<string>)await _tartistRepository.FindArtistNameInTrack(track.TrackId);
+
+            return new BasicTrackRespone
+            {
+                TrackId = track.TrackId,
+                TrackName = track.TrackName,
+                TrackBlobsLink = track.TrackBlobsLink,
+                Duration = track.Duration,
+                Img = track.Img,
+                Artists = artistNames
+            };
+        }
+
     }
 }

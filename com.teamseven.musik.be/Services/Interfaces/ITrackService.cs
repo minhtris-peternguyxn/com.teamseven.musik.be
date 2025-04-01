@@ -10,11 +10,11 @@ namespace com.teamseven.musik.be.Services.Interfaces
     {
         Task<int> AddTrackAsync(TrackCreateRequest track);
 
-        Task<IEnumerable<Track>> GetTracksByIdsAsync(List<int> ids);
+        Task<IEnumerable<BasicTrackRespone>> GetTracksByIdsAsync(List<int> ids);
 
         Task DeleteTrackAsync(int id);
 
-        Task<IEnumerable<Track>> GetAllTracksAsync();
+        Task<IEnumerable<Models.DataTranfers.BasicTrackRespone>> GetAllTracksAsync();
 
         Task<Track> GetTrackByIdAsync(int id);
 

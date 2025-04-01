@@ -269,6 +269,22 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "com.teamseven.musik.be.Controllers.MainFlowFunction.ArtistController",
+    "Method": "GetListArtistByName",
+    "RelativePath": "api/artist/name/{name}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "name",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "com.teamseven.musik.be.Controllers.MainFlowFunction.GenreController",
     "Method": "GetAllGenre",
     "RelativePath": "api/genre",

@@ -103,6 +103,22 @@ namespace com.teamseven.musik.be.Repositories.impl
             return await _context.TrackArtists
                 .FirstOrDefaultAsync(ta => ta.TrackId == trackId && ta.ArtistId == artistId);
         }
+
+        public async Task<IEnumerable<string>?> FindArtistNameInTrack(int trackId)
+        {
+            var trackExists = await _context.Tracks.AnyAsync(t => t.TrackId == trackId);
+            if (!trackExists)
+                throw new KeyNotFoundException($"Track with TrackId {trackId} not found.");
+
+            var artistNames = await _context.Tracks
+                .Where(t => t.TrackId == trackId)
+                .SelectMany(t => t.TrackArtists)
+                .Select(ta => ta.Artist.ArtistName)
+                .Distinct()
+                .ToListAsync();
+
+            return artistNames.Any() ? artistNames : null;
+        }
     }
 }
 

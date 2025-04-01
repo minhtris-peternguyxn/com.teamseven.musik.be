@@ -135,5 +135,10 @@ namespace com.teamseven.musik.be.Services.QueryDB
             Console.WriteLine($"Deleting artist with ID {id} from repository...");
             
         }
+
+        public async Task<IEnumerable<Artist?>> GetArtistByNameAsync(string name)
+        {
+            return await _repo.GetArtistByNameAsync(name);
+        }
     }
 }

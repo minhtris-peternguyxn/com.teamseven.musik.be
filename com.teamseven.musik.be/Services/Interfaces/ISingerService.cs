@@ -15,6 +15,8 @@ namespace com.teamseven.musik.be.Services.Interfaces
 
         Task<Artist> GetArtistInfoAsync(int id);
 
+        Task<IEnumerable<Artist>?> GetArtistByNameAsync(string name);
+
         Task<IEnumerable<Artist>> GetAllArtistsAsync();
 
         Task CreateNewArtistAsync(Artist artistEntity);
@@ -22,6 +24,8 @@ namespace com.teamseven.musik.be.Services.Interfaces
         Task UpdateArtistAsync(Artist artistEntity);
 
         Task DeleteArtistAsync(int id);
+
+        //Task<string> GetArtistNameAsync(int id);
 
         //Task<bool> GetArtistExist(int id);
     }
