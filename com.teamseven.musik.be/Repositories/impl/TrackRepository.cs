@@ -9,6 +9,7 @@ namespace com.teamseven.musik.be.Repositories.impl
     public class TrackRepository : ITrackRepository
     {
         private readonly MusikDbContext _context;
+        private readonly NormalizationService _normalizationService;
 
         public TrackRepository(MusikDbContext context)
         {
@@ -23,7 +24,7 @@ namespace com.teamseven.musik.be.Repositories.impl
             track.TotalLikes = 0;
             track.TotalViews = 0;
 
-
+            track.NormalizedName = _normalizationService.RemoveDiacritics(track.TrackName);
             _context.Tracks.Add(track);
             await _context.SaveChangesAsync();
         }

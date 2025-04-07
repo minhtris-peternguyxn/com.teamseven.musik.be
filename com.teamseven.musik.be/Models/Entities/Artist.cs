@@ -7,6 +7,8 @@ public partial class Artist
 {
     public int ArtistId { get; set; }
     public string ArtistName { get; set; }
+
+    public string? NormalizedName { get; set; }
     public DateTime CreatedDate { get; set; }
     public string Img { get; set; }
     public int SubscribeNumber { get; set; }

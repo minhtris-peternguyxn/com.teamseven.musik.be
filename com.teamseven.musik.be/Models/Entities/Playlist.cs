@@ -7,6 +7,8 @@ public partial class Playlist
 {
     public int PlaylistId { get; set; }
     public string PlaylistName { get; set; }
+
+    public string? NormalizedName { get; set; }
     public DateTime CreatedDate { get; set; }
     public int UserId { get; set; }
 

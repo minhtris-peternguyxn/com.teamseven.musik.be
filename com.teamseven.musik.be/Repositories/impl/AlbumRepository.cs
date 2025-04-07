@@ -12,11 +12,13 @@ namespace com.teamseven.musik.be.Repositories.impl
     {
         private readonly MusikDbContext _context;
         private readonly IAlbumArtistRepository _albumArtistRepository;
+        private readonly NormalizationService _normalizationService;
 
-        public AlbumRepository(MusikDbContext context, IAlbumArtistRepository albumArtistRepository)
+        public AlbumRepository(MusikDbContext context, IAlbumArtistRepository albumArtistRepository, NormalizationService normalizationService)
         {
             _context = context;
             _albumArtistRepository = albumArtistRepository;
+            _normalizationService = normalizationService;
         }
 
         public async Task<IEnumerable<Album>> GetAllAlbumsAsync()
@@ -34,8 +36,10 @@ namespace com.teamseven.musik.be.Repositories.impl
         }
         public async Task<IEnumerable<Album>?> GetAlbumByNameAsync(string name)
         {
+            var normalizedName = _normalizationService.RemoveDiacritics(name);
+
             var albums = await _context.Albums
-                .Where(a => a.AlbumName.Contains(name))
+                .Where(a => a.NormalizedName.Contains(normalizedName))
                 .ToListAsync();
 
             return albums;
@@ -44,12 +48,14 @@ namespace com.teamseven.musik.be.Repositories.impl
 
         public async Task AddAlbumAsync(Album album)
         {
+            album.NormalizedName = _normalizationService.RemoveDiacritics(album.AlbumName);
             await _context.Albums.AddAsync(album);
             await _context.SaveChangesAsync();
         }
 
         public async Task UpdateAlbumAsync(Album album)
         {
+            album.NormalizedName = _normalizationService.RemoveDiacritics(album.AlbumName);
             _context.Albums.Update(album);
             await _context.SaveChangesAsync();
         }

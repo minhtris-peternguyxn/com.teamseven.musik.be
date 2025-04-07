@@ -1197,6 +1197,10 @@
             "type": "string",
             "nullable": true
           },
+          "normalizedName": {
+            "type": "string",
+            "nullable": true
+          },
           "createdDate": {
             "type": "string",
             "format": "date-time"
@@ -1288,6 +1292,10 @@
             "type": "string",
             "nullable": true
           },
+          "normalizedName": {
+            "type": "string",
+            "nullable": true
+          },
           "createdDate": {
             "type": "string",
             "format": "date-time"
@@ -1353,6 +1361,10 @@
             "format": "int32"
           },
           "genreName": {
+            "type": "string",
+            "nullable": true
+          },
+          "normalizedName": {
             "type": "string",
             "nullable": true
           },
@@ -1473,6 +1485,10 @@
             "type": "string",
             "nullable": true
           },
+          "normalizedName": {
+            "type": "string",
+            "nullable": true
+          },
           "createdDate": {
             "type": "string",
             "format": "date-time"
@@ -1542,6 +1558,10 @@
             "type": "string",
             "nullable": true
           },
+          "normalizedName": {
+            "type": "string",
+            "nullable": true
+          },
           "podcastDetail": {
             "type": "string",
             "nullable": true
@@ -1603,6 +1623,10 @@
             "format": "int32"
           },
           "trackName": {
+            "type": "string",
+            "nullable": true
+          },
+          "normalizedName": {
             "type": "string",
             "nullable": true
           },

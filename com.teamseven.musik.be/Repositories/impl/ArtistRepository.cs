@@ -12,14 +12,17 @@ namespace com.teamseven.musik.be.Repositories.impl
     public class ArtistRepository : IArtistRepository
     {
         private readonly MusikDbContext _context;
+        private readonly NormalizationService _normalizationService;
 
-        public ArtistRepository(MusikDbContext context)
+        public ArtistRepository(MusikDbContext context, NormalizationService normalizationService)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
+            _normalizationService = normalizationService ?? throw new ArgumentNullException(nameof(_normalizationService));
         }
 
         public async Task AddArtistAsync(Artist artist)
         {
+            artist.NormalizedName =  _normalizationService.RemoveDiacritics(artist.ArtistName);
             await _context.Artists.AddAsync(artist);
             await _context.SaveChangesAsync();
         }
@@ -38,6 +41,7 @@ namespace com.teamseven.musik.be.Repositories.impl
 
         public async Task UpdateArtistAsync(Artist artist)
         {
+            artist.NormalizedName = _normalizationService.RemoveDiacritics(artist.ArtistName);
             _context.Artists.Update(artist);
             await _context.SaveChangesAsync();
         }
@@ -68,35 +72,47 @@ namespace com.teamseven.musik.be.Repositories.impl
             return artist?.ArtistName ?? string.Empty;
         }
 
-        public async Task<IEnumerable<Artist>> GetArtistByNameAsync(string name)
+        public async Task<IEnumerable<Artist>?> GetArtistByNameAsync(string name)
         {
             if (string.IsNullOrEmpty(name))
                 return new List<Artist>();
 
-            // Chuẩn hóa chuỗi tìm kiếm
-            string normalizedSearch = RemoveDiacritics(name).ToLower();
+            string normalizedInput = _normalizationService.RemoveDiacritics(name.ToLower());
+
 
             return await _context.Artists
-                .Where(a => RemoveDiacritics(a.ArtistName).ToLower().Contains(normalizedSearch))
+                .Where(a => a.NormalizedName.Contains(normalizedInput))
+                .ToListAsync();
+        }
+        public async Task<IEnumerable<Artist>?> GetArtistByNameAsyncForConditions(string name)
+        {
+            if (string.IsNullOrEmpty(name))
+                return new List<Artist>();
+
+            string normalizedInput = _normalizationService.RemoveDiacritics(name.ToLower());
+
+
+            return await _context.Artists
+                .Where(a => a.NormalizedName == normalizedInput)
                 .ToListAsync();
         }
 
-        // Hàm loại bỏ dấu
-        private string RemoveDiacritics(string text)
-        {
-            if (string.IsNullOrEmpty(text))
-                return text;
+        //// Hàm loại bỏ dấu
+        //private string RemoveDiacritics(string text)
+        //{
+        //    if (string.IsNullOrEmpty(text))
+        //        return text;
 
-            string normalizedString = text.Normalize(NormalizationForm.FormD);
-            StringBuilder stringBuilder = new StringBuilder();
+        //    string normalizedString = text.Normalize(NormalizationForm.FormD);
+        //    StringBuilder stringBuilder = new StringBuilder();
 
-            foreach (char c in normalizedString)
-            {
-                if (CharUnicodeInfo.GetUnicodeCategory(c) != UnicodeCategory.NonSpacingMark)
-                    stringBuilder.Append(c);
-            }
+        //    foreach (char c in normalizedString)
+        //    {
+        //        if (CharUnicodeInfo.GetUnicodeCategory(c) != UnicodeCategory.NonSpacingMark)
+        //            stringBuilder.Append(c);
+        //    }
 
-            return stringBuilder.ToString().Normalize(NormalizationForm.FormC);
-        }
+        //    return stringBuilder.ToString().Normalize(NormalizationForm.FormC);
+        //}
     }
 }

@@ -7,6 +7,7 @@ public partial class Album
 {
     public int AlbumId { get; set; }
     public string AlbumName { get; set; }
+    public string? NormalizedName { get; set; }
     public DateTime CreatedDate { get; set; }
     public DateTime? ReleaseDate { get; set; }
     public string Img { get; set; }

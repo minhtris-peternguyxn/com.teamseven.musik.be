@@ -9,13 +9,16 @@ namespace com.teamseven.musik.be.Repositories.impl
     public class GenreRepository : IGenreRepository
     {
         private MusikDbContext _context;
-        public GenreRepository(MusikDbContext context)
+        private NormalizationService _normalizationService;
+        public GenreRepository(MusikDbContext context, NormalizationService normalizationService )
         {
             _context = context;
+            _normalizationService = normalizationService;
         }
 
         public Task AddGenreAsync(Genre genre)
         {
+            genre.NormalizedName = _normalizationService.RemoveDiacritics(genre.GenreName);
             _context.Genres.Add(genre);
             return _context.SaveChangesAsync();
         }
@@ -51,7 +54,9 @@ namespace com.teamseven.musik.be.Repositories.impl
 
         public async Task<IEnumerable<Genre>> GetGenresByNameAsync(string name)
         {
-            return await _context.Genres.Where(a => a.GenreName.Contains(name)).ToListAsync();
+            var normalizedName = _normalizationService.RemoveDiacritics(name);
+
+            return await _context.Genres.Where(a => a.NormalizedName.Contains(normalizedName)).ToListAsync();
         }
 
         //public async Task<Genre> GetGerneByNameAsync(string name)
@@ -63,6 +68,7 @@ namespace com.teamseven.musik.be.Repositories.impl
 
         public async Task UpdateGenreAsync(Genre genre)
         {
+            genre.NormalizedName = _normalizationService.RemoveDiacritics(genre.GenreName);
             _context.Genres.Update(genre);
             await _context.SaveChangesAsync();
         }

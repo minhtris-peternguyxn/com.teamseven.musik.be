@@ -62,8 +62,8 @@ namespace com.teamseven.musik.be.Services.QueryDB
                 throw new ArgumentNullException(nameof(artistEntity), "Artist entity cannot be null.");
             }
 
-            var existingArtist = await _repo.GetArtistByNameAsync(artistEntity.ArtistName);
-            if (existingArtist != null)
+            var existingArtist = await _repo.GetArtistByNameAsyncForConditions(artistEntity.ArtistName);
+            if (existingArtist != null && existingArtist.Any())
             {
                 throw new ArgumentException($"Artist '{artistEntity.ArtistName}' already exists.");
             }

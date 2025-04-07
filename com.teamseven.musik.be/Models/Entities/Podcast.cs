@@ -13,6 +13,8 @@ public partial class Podcast
 
     public string? PodcastTitle { get; set; }
 
+    public string? NormalizedName { get; set; }
+
     public string? PodcastDetail { get; set; }
 
     public int? Duration { get; set; }

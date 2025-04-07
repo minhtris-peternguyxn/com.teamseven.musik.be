@@ -7,6 +7,8 @@ public partial class Genre
 {
     public int GenreId { get; set; }
     public string GenreName { get; set; }
+
+    public string? NormalizedName { get; set; }
     public DateTime CreatedDate { get; set; }
     public string Img { get; set; }
 
