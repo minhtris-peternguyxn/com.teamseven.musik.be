@@ -52,20 +52,26 @@ Musik is built using a combination of modern technologies and cloud services:
 ### Frontend
 -  HTML, CSS, JavaScript, VueJS
 
+### DevOps
+- **Linux System**: Ubuntu-based server for hosting, automation, and infrastructure management.
+- **Git Auto Commit:** Automated script for committing code changes to the repository.
+- **Firewall Management:** Automated port opening/closing using ufw for security.
+
 ---
 
 ## Features
 - Stream music from a cloud-hosted library.
+- Migrate audio storage to AWS EC2 server with Python (replacing expired Azure Blobs).
 - User authentication via OAuth2 for secure login.
 - Create and manage personalized playlists.
 - Responsive design for desktop and mobile in-build browser.
 - API-driven architecture with Swagger documentation.
+- Automated code commits and port management on Linux.
 
 ---
 
 
 ## Future Improvements
-- Migrate audio storage to AWS EC2 server with Python (replacing expired Azure Blobs).
 - Add charts algorithm soon.
 - Implement a modern frontend framework (ReactJS and VueJS) for a better UI/UX.
 - Optimize database queries for faster load times.
