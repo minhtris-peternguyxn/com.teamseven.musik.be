@@ -83,6 +83,4 @@ Feel free to reach out if you have questions, suggestions, or just want to chat 
 
 ### Notes
 - **Azure Expiration**: The project initially used Azure services (Blobs and VM), but they’ve expired. It’s now fully migrated to AWS (RDS and EC2).
-- **Domain Name**: Update the demo and Swagger links once you’ve registered and configured your domain.
-
-Hãy thay đổi các placeholder như URL demo, URL Swagger, GitHub username, email, và bất kỳ chi tiết nào khác phù hợp với dự án thực tế của bạn. Nếu bạn cần thêm phần nào (ví dụ: cách deploy cụ thể hơn, license), cứ nói nhé!
+- **Domain Name**: In Maintance, will update soon!
