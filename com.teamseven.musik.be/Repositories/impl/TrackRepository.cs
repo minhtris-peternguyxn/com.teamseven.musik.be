@@ -1,4 +1,5 @@
 ﻿//using com.teamseven.musik.be.Models.Contexts;
+using com.teamseven.musik.be.Controllers;
 using com.teamseven.musik.be.Models.Contexts;
 using com.teamseven.musik.be.Models.Entities;
 using com.teamseven.musik.be.Repositories.interfaces;
@@ -11,9 +12,10 @@ namespace com.teamseven.musik.be.Repositories.impl
         private readonly MusikDbContext _context;
         private readonly NormalizationService _normalizationService;
 
-        public TrackRepository(MusikDbContext context)
+        public TrackRepository(MusikDbContext context, NormalizationService normalizationService)
         {
             _context = context;
+            _normalizationService = normalizationService;
         }
 
 
