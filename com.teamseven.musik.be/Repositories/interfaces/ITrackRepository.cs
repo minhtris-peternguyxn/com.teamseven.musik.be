@@ -4,7 +4,7 @@ namespace com.teamseven.musik.be.Repositories.interfaces
 {
     public interface ITrackRepository
     {
-        Task<Track> GetByIdAsync(int id);
+        Task<Track?> GetByIdAsync(int id);
         Task AddTrackAsync(Track track);
 
         Task DeleteTrackAsync(int id);

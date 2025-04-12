@@ -29,7 +29,7 @@ namespace com.teamseven.musik.be.Services.Interfaces
         Task UpdateTrackAsync(TrackUpdateRequest trackUpdate);
 
 
-        Task AddTrackToAlbumAsync(TrackAlbum trackAlbum);
+        //Task AddTrackToAlbumAsync(TrackAlbum trackAlbum);
 
         Task AddTrackToGenreAsync(TrackGenre trackGenre);
 

@@ -15,12 +15,14 @@ namespace com.teamseven.musik.be.Services
         private readonly IAlbumArtistRepository _albumArtistRepository;
         private readonly ITrackAlbumRepository _trackAlbumRepository;
         private readonly IArtistRepository _artistRepository;
-        public AlbumService(IAlbumRepository albumRepository, IAlbumArtistRepository albumArtistRepository, ITrackAlbumRepository trackAlbumRepository, IArtistRepository artistRepository)
+        private readonly ITrackRepository _trackRepository;
+        public AlbumService(IAlbumRepository albumRepository, IAlbumArtistRepository albumArtistRepository, ITrackAlbumRepository trackAlbumRepository, IArtistRepository artistRepository, ITrackRepository trackRepository)
         {
             _albumRepository = albumRepository ?? throw new ArgumentNullException(nameof(albumRepository));
             _albumArtistRepository = albumArtistRepository ?? throw new ArgumentNullException(nameof(albumArtistRepository));
             _trackAlbumRepository = trackAlbumRepository ?? throw new ArgumentNullException(nameof(trackAlbumRepository));
             _artistRepository = artistRepository ?? throw new ArgumentNullException(nameof(trackAlbumRepository));
+            _trackRepository = trackRepository ?? throw new ArgumentNullException(nameof(trackRepository));
         }
 
         public async Task<IEnumerable<Album>> GetAllAlbumsAsync()
@@ -140,26 +142,35 @@ namespace com.teamseven.musik.be.Services
                 });
             }
         }
-        public async Task AddArtistToAlbum(List<AlbumArtist> artists)
+        public async Task AddArtistToAlbum(List<int> artistIds, int albumId)
         {
-            if (artists == null || !artists.Any())
-                throw new ArgumentException("Artist list cannot be null or empty.", nameof(artists));
+            if (artistIds == null || !artistIds.Any())
+                throw new ArgumentException("Artist list cannot be null or empty.", nameof(artistIds));
 
-            // Validate toàn bộ dữ liệu trước khi lưu
-            foreach (var artist in artists)
-            {
-                if (artist.AlbumId <= 0 || artist.ArtistId <= 0)
-                    throw new ArgumentException($"Invalid Album ID ({artist.AlbumId}) or Artist ID ({artist.ArtistId}).");
+            //if (_albumRepository.GetAlbumByIdAsync(albumId) == null)
+            //    throw new InvalidOperationException($"Not Found Album ID ({albumId})");
 
-                var exists = await _albumArtistRepository.GetAlbumArtistAsync(artist.AlbumId, artist.ArtistId);
-                if (exists != null)
-                    throw new ArgumentException($"Artist ID {artist.ArtistId} already linked to Album ID {artist.AlbumId}.");
-            }
+            //// Validate toàn bộ dữ liệu trước khi lưu
+            //foreach (var artist in artistIds)
+            //{
+            //    if (albumId <= 0 || artist <= 0)
+            //        throw new ArgumentException($"Invalid Album ID ({albumId}) or Artist ID ({artist}).");
+
+            //    if(_artistRepository.)
+
+                
+            //    //var exists = await _albumArtistRepository.GetAlbumArtistAsync(artist.AlbumId, artist.ArtistId);
+            //    //if (exists != null)
+            //    //    throw new ArgumentException($"Artist ID {artist.ArtistId} already linked to Album ID {artist.AlbumId}.");
+            //}
+
+
+            //KO CAN VALIDATE VI REPOSITORY VALIDATE ROI
 
             // Thêm dữ liệu và lưu
-            foreach (var artist in artists)
+            foreach (var artist in artistIds)
             {
-                await _albumArtistRepository.AddAlbumArtistAsync(artist);
+                await _albumArtistRepository.AddAlbumArtistAsync(new AlbumArtist(albumId,artist));
             }    
             
         }
@@ -229,6 +240,32 @@ namespace com.teamseven.musik.be.Services
         public async Task<IEnumerable<Artist>?> GetArtistsInAlbumAsync(int albumId)
         {
             return await _albumArtistRepository.GetArtistsInAlbumAsync(albumId);
+        }
+
+        public async Task AddTracksToAlbum(List<int> trackIds, int albumId)
+        {
+            if (albumId < 1 ||  trackIds.Count == 0 || !trackIds.Any()){
+                throw new ArgumentException(" One information is missing");
+            }
+            // Validate toàn bộ dữ liệu trước khi lưu
+            foreach (var track in trackIds)
+            {
+                if (track < 1)
+                    throw new ArgumentException($"Invalid Track ID ({track}).");
+
+                //var exists =  _trackRepository.GetByIdAsync(track);
+                //if (exists == null)
+                //    throw new ArgumentException($"Album ID not found.");
+                //VALIDATE O REPOSITORY ROI
+            }
+            //convert to TrackAlbum element
+            foreach(var track in trackIds)
+            {
+              TrackAlbum trackAlbum = new TrackAlbum(track,albumId);              
+              await  _trackAlbumRepository.AddTrackAlbumAsync(trackAlbum); //da xu li duplicate nen ko sao
+
+            }    
+
         }
 
         //public async Task<IEnumerable<Album>?> GetAlbumsInTrack(int trackId)

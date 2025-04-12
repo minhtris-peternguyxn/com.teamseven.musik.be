@@ -46,7 +46,11 @@ namespace com.teamseven.musik.be.Repositories.impl
             return await _context.Tracks.ToListAsync();
         }
 
-        public async Task<Track> GetByIdAsync(int id) => await _context.Tracks.FindAsync(id);
+        public async Task<Track?> GetByIdAsync(int id)
+
+        {
+            return await _context.Tracks.FindAsync(id);
+        }
 
         public async Task<IEnumerable<TrackAlbum>> ListTrackByAlbum(int albumId)
         {

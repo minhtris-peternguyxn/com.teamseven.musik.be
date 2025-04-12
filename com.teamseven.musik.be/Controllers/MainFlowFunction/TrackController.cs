@@ -35,7 +35,7 @@ namespace com.teamseven.musik.be.Controllers.MainFlowFunction
             }
         }
 
-        [HttpPost("get-tracks-by-ids")]
+        [HttpGet("get-tracks-by-ids")]
         [AllowAnonymous]
         public async Task<IActionResult> GetTracksByIds([FromBody] List<int> trackIds)
         {
@@ -175,20 +175,20 @@ namespace com.teamseven.musik.be.Controllers.MainFlowFunction
             }
         }
 
-        [HttpPost("add-track-to-album")]
-        [Authorize(Policy = "SaleStaffPolicy")]
-        public async Task<IActionResult> AddTrackToAlbum([FromBody] TrackAlbum trackAlbum)
-        {
-            try
-            {
-                await _trackService.AddTrackToAlbumAsync(trackAlbum);
-                return Ok("Added to album successfully.");
-            }
-            catch (Exception ex)
-            {
-                return HandleException(ex);
-            }
-        }
+        //[HttpPost("add-track-to-album")]
+        //[Authorize(Policy = "SaleStaffPolicy")]
+        //public async Task<IActionResult> AddTrackToAlbum([FromBody] TrackAlbum trackAlbum)
+        //{
+        //    try
+        //    {
+        //        await _trackService.AddTrackToAlbumAsync(trackAlbum);
+        //        return Ok("Added to album successfully.");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return HandleException(ex);
+        //    }
+        //}
 
         [HttpPost("add-track-to-genre")]
         [Authorize(Policy = "SaleStaffPolicy")]

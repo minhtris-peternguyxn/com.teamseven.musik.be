@@ -117,11 +117,11 @@ namespace com.teamseven.musik.be.Controllers.MainFlowFunction
         // POST: ADD ARTISTS TO ALBUM
         [HttpPost("{id:int}/artists")]
         [Authorize(Policy = "SaleStaffPolicy")]
-        public async Task<IActionResult> AddArtistsToAlbum(int id, [FromBody] List<AlbumArtist> artists)
+        public async Task<IActionResult> AddArtistsToAlbum(int id, [FromBody] List<int> artists)
         {
             try
             {
-                await _albumService.AddArtistToAlbum(artists);
+                await _albumService.AddArtistToAlbum(artists, id);
                 return NoContent();
             }
             catch (Exception ex)
@@ -133,13 +133,13 @@ namespace com.teamseven.musik.be.Controllers.MainFlowFunction
         // POST: ADD TRACKS TO ALBUM
         [HttpPost("{id:int}/tracks")]
         [Authorize(Policy = "SaleStaffPolicy")]
-        public async Task<IActionResult> AddTracksToAlbum(int id, [FromBody] List<TrackAlbum> tracks)
+        public async Task<IActionResult> AddTracksToAlbum(int id, [FromBody] List<int> tracks)
         {
             try
             {
                 foreach (var track in tracks)
                 {
-                    await _trackService.AddTrackToAlbumAsync(track);
+                    await _albumService.AddTracksToAlbum(tracks, id);
                 }    
                 return NoContent();
             }

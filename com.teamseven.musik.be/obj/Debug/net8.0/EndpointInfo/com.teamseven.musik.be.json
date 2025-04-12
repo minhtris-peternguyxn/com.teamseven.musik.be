@@ -195,7 +195,8 @@
               "schema": {
                 "type": "array",
                 "items": {
-                  "$ref": "#/components/schemas/AlbumArtist"
+                  "type": "integer",
+                  "format": "int32"
                 }
               }
             },
@@ -203,7 +204,8 @@
               "schema": {
                 "type": "array",
                 "items": {
-                  "$ref": "#/components/schemas/AlbumArtist"
+                  "type": "integer",
+                  "format": "int32"
                 }
               }
             },
@@ -211,7 +213,8 @@
               "schema": {
                 "type": "array",
                 "items": {
-                  "$ref": "#/components/schemas/AlbumArtist"
+                  "type": "integer",
+                  "format": "int32"
                 }
               }
             }
@@ -307,7 +310,8 @@
               "schema": {
                 "type": "array",
                 "items": {
-                  "$ref": "#/components/schemas/TrackAlbum"
+                  "type": "integer",
+                  "format": "int32"
                 }
               }
             },
@@ -315,7 +319,8 @@
               "schema": {
                 "type": "array",
                 "items": {
-                  "$ref": "#/components/schemas/TrackAlbum"
+                  "type": "integer",
+                  "format": "int32"
                 }
               }
             },
@@ -323,7 +328,8 @@
               "schema": {
                 "type": "array",
                 "items": {
-                  "$ref": "#/components/schemas/TrackAlbum"
+                  "type": "integer",
+                  "format": "int32"
                 }
               }
             }
@@ -823,7 +829,7 @@
       }
     },
     "/api/track/get-tracks-by-ids": {
-      "post": {
+      "get": {
         "tags": [
           "Track"
         ],
@@ -983,37 +989,6 @@
         "tags": [
           "Track"
         ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/api/track/add-track-to-album": {
-      "post": {
-        "tags": [
-          "Track"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/TrackAlbum"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/TrackAlbum"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/TrackAlbum"
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "description": "OK"

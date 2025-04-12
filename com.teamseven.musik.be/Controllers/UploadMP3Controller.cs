@@ -24,20 +24,26 @@ namespace com.teamseven.musik.be.Controllers
         }
 
         [HttpPost("upload_convert_mp3")]
-        public async Task<IActionResult> Upload(IFormFile file)
+        public Task<IActionResult> Upload(IFormFile file)
         {
-            if (file == null || file.Length == 0) return BadRequest("Please upload a file.");
+            //if (file == null || file.Length == 0) return BadRequest("Please upload a file.");
 
-            var containerClient = _blobServiceClient.GetBlobContainerClient("musikstorage");
-            //create container if not exist
-            await containerClient.CreateIfNotExistsAsync();
+            //var containerClient = _blobServiceClient.GetBlobContainerClient("musikstorage");
+            ////create container if not exist
+            //await containerClient.CreateIfNotExistsAsync();
 
-            var blobClient = containerClient.GetBlobClient(Guid.NewGuid() + Path.GetExtension(file.Name));
+            //var blobClient = containerClient.GetBlobClient(Guid.NewGuid() + Path.GetExtension(file.Name));
 
-            await using (var stream = file.OpenReadStream()) { await blobClient.UploadAsync(stream, true); }
+            //await using (var stream = file.OpenReadStream()) { await blobClient.UploadAsync(stream, true); }
 
-            var shortUrl = blobClient.Uri.ToString();
-            return Ok(shortUrl);
+            //var shortUrl = blobClient.Uri.ToString();
+            //return Ok(shortUrl);
+
+            return Task.FromResult<IActionResult>(StatusCode(StatusCodes.Status503ServiceUnavailable, new
+            {
+                error = "Service is no longer available due to Azure expiration."
+            }
+            ));
         }
     }
 }

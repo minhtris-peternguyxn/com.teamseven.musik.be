@@ -200,21 +200,21 @@ namespace com.teamseven.musik.be.Services.QueryDB
 
             await _trackRepository.UpdateTrackAsync(existingTrack);
         }
-        public async Task AddTrackToAlbumAsync(TrackAlbum trackAlbum)
-        {
-            if (trackAlbum == null)
-                throw new ArgumentNullException(nameof(trackAlbum), "TrackAlbum cannot be null.");
+        //public async Task AddTrackToAlbumAsync(TrackAlbum trackAlbum)
+        //{
+        //    if (trackAlbum == null)
+        //        throw new ArgumentNullException(nameof(trackAlbum), "TrackAlbum cannot be null.");
 
-            var track = await _trackRepository.GetByIdAsync(trackAlbum.TrackId);
-            if (track == null)
-                throw new KeyNotFoundException($"Track with ID {trackAlbum.TrackId} not found.");
+        //    var track = await _trackRepository.GetByIdAsync(trackAlbum.TrackId);
+        //    if (track == null)
+        //        throw new KeyNotFoundException($"Track with ID {trackAlbum.TrackId} not found.");
 
-            var album = await _albumRepository.GetAlbumByIdAsync(trackAlbum.AlbumId);
-            if (album == null)
-                throw new KeyNotFoundException($"Album with ID {trackAlbum.AlbumId} not found.");
+        //    var album = await _albumRepository.GetAlbumByIdAsync(trackAlbum.AlbumId);
+        //    if (album == null)
+        //        throw new KeyNotFoundException($"Album with ID {trackAlbum.AlbumId} not found.");
 
-            await _talbumRepository.AddTrackAlbumAsync(trackAlbum);
-        }
+        //    await _talbumRepository.AddTrackAlbumAsync(trackAlbum);
+        //}
 
         public async Task AddTrackToGenreAsync(TrackGenre trackGenre)
         {

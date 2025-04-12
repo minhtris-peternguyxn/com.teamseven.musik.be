@@ -18,9 +18,11 @@ namespace com.teamseven.musik.be.Services.Interfaces
 
         Task UpdateAlbumAsync(Album album);
 
-        Task AddArtistToAlbum(List<AlbumArtist> artists);
+        Task AddArtistToAlbum(List<int> artistIds, int albumId);
 
-        //Task AddTracksToAlbum(List<TrackAlbum> tracks);
+
+
+        Task AddTracksToAlbum(List<int> trackIds, int albumId);
 
         Task DeleteAlbum(int id);
 

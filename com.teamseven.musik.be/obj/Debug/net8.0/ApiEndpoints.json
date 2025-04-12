@@ -109,7 +109,7 @@
       },
       {
         "Name": "artists",
-        "Type": "System.Collections.Generic.List\u00601[[com.teamseven.musik.be.Models.Entities.AlbumArtist, com.teamseven.musik.be, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.List\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": true
       }
     ],
@@ -167,7 +167,7 @@
       },
       {
         "Name": "tracks",
-        "Type": "System.Collections.Generic.List\u00601[[com.teamseven.musik.be.Models.Entities.TrackAlbum, com.teamseven.musik.be, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.List\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": true
       }
     ],
@@ -506,22 +506,6 @@
   },
   {
     "ContainingType": "com.teamseven.musik.be.Controllers.MainFlowFunction.TrackController",
-    "Method": "AddTrackToAlbum",
-    "RelativePath": "api/track/add-track-to-album",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "trackAlbum",
-        "Type": "com.teamseven.musik.be.Models.Entities.TrackAlbum",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "com.teamseven.musik.be.Controllers.MainFlowFunction.TrackController",
     "Method": "AddTrackToGenre",
     "RelativePath": "api/track/add-track-to-genre",
     "HttpMethod": "POST",
@@ -588,7 +572,7 @@
     "ContainingType": "com.teamseven.musik.be.Controllers.MainFlowFunction.TrackController",
     "Method": "GetTracksByIds",
     "RelativePath": "api/track/get-tracks-by-ids",
-    "HttpMethod": "POST",
+    "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
