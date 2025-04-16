@@ -1228,7 +1228,8 @@
       },
       "AlbumRequest": {
         "required": [
-          "artistIds"
+          "artistIds",
+          "trackIds"
         ],
         "type": "object",
         "properties": {
@@ -1237,6 +1238,14 @@
             "nullable": true
           },
           "artistIds": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true
+          },
+          "trackIds": {
             "type": "array",
             "items": {
               "type": "integer",

@@ -5,6 +5,7 @@ using com.teamseven.musik.be.Services.Interfaces;
 using Microsoft.AspNetCore.Http.HttpResults;
 using System;
 using System.Collections.Generic;
+using System.Net.WebSockets;
 using System.Threading.Tasks;
 
 namespace com.teamseven.musik.be.Services
@@ -25,12 +26,22 @@ namespace com.teamseven.musik.be.Services
             _trackRepository = trackRepository ?? throw new ArgumentNullException(nameof(trackRepository));
         }
 
-        public async Task<IEnumerable<Album>> GetAllAlbumsAsync()
+        public async Task<IEnumerable<AlbumResponse>> GetAllAlbumsAsync()
         {
-            return await _albumRepository.GetAllAlbumsAsync();
+            var albums = await _albumRepository.GetAllAlbumsAsync();
+            List<AlbumResponse> albumResponses = new List<AlbumResponse>();
+
+            foreach (var album in albums)
+            {
+                var response = await ConvertToResponse(album);
+                albumResponses.Add(response);
+            }
+
+            return albumResponses;
         }
 
-        public async Task<Album> GetAlbumByIdAsync(int id)
+
+        public async Task<AlbumResponse> GetAlbumByIdAsync(int id)
         {
             if (id <= 0)
                 throw new ArgumentOutOfRangeException(nameof(id), "Album ID must be greater than zero.");
@@ -39,16 +50,27 @@ namespace com.teamseven.musik.be.Services
             if (album == null)
                 throw new KeyNotFoundException($"Album with ID {id} not found.");
 
-            return album;
+            return await ConvertToResponse(album); // <-- sửa ở đây
         }
 
-        public async Task<IEnumerable<Album>?> GetAlbumByNameAsync(string name)
+        public async Task<IEnumerable<AlbumResponse>?> GetAlbumByNameAsync(string name)
         {
             if (string.IsNullOrWhiteSpace(name))
                 throw new ArgumentException("Album name cannot be null or empty.", nameof(name));
 
-            return await _albumRepository.GetAlbumByNameAsync(name);
+            var albums = await _albumRepository.GetAlbumByNameAsync(name);
+
+            var result = new List<AlbumResponse>();
+            foreach (var album in albums)
+            {
+                result.Add(await ConvertToResponse(album));
+            }
+
+            return result;
         }
+
+
+     
 
         public async Task UpdateAlbumAsync(Album album)
         {
@@ -118,6 +140,12 @@ namespace com.teamseven.musik.be.Services
                 if (!exists) throw new KeyNotFoundException($"Artist with ID {artist} not found.");
             }
 
+            foreach (var track in album.TrackIds)
+            {
+                var exists = await _trackRepository.GetByIdAsync(track);
+                if(exists == null) throw new KeyNotFoundException($"Track with ID {track} not found.");
+            }
+
             // Tao va luu album
             var newAlbum = new Album
             {
@@ -139,6 +167,15 @@ namespace com.teamseven.musik.be.Services
                 {
                     AlbumId = albumId,
                     ArtistId = artistId
+                });
+            }
+
+            foreach (var trackId in album.TrackIds)
+            {
+                await _trackAlbumRepository.AddTrackAlbumAsync(new TrackAlbum
+                {
+                    AlbumId = albumId,
+                    TrackId = trackId
                 });
             }
         }
@@ -272,5 +309,24 @@ namespace com.teamseven.musik.be.Services
         //{
         //    return await _trackAlbumRepository.Get
         //} NONEED
+
+        private async Task<AlbumResponse> ConvertToResponse(Album album)
+        {
+            var trackIds = await _trackAlbumRepository.GetTrackIdsFromAlbumAsync(album.AlbumId);
+            var artistIds = await _albumArtistRepository.GetArtistIdsInAlbumAsync(album.AlbumId);
+
+            AlbumResponse albumResponse = new AlbumResponse
+            {
+                Id = album.AlbumId,
+                AlbumName = album.AlbumName,
+                Img = album.Img,
+                ReleaseDate = album.ReleaseDate,
+                TrackIds = trackIds?.ToList() ?? new List<int>(),     // Handle null 
+                ArtistIds = artistIds?.ToList() ?? new List<int>()    
+            };
+
+            return albumResponse;
+        }
+
     }
 }

@@ -88,5 +88,18 @@ namespace com.teamseven.musik.be.Repositories.impl
                 )
                 .ToListAsync();
         }
+
+        public async Task<IEnumerable<int>?> GetTrackIdsFromAlbumAsync(int albumId)
+        {
+            var albumExists = await _context.Albums.AnyAsync(a => a.AlbumId == albumId);
+            if (!albumExists)
+                throw new KeyNotFoundException($"Album with AlbumId {albumId} not found.");
+
+            return await _context.TrackAlbums
+                .Where(ta => ta.AlbumId == albumId)
+                .Select(ta => ta.TrackId)
+                .ToListAsync();
+        }
+
     }
 }

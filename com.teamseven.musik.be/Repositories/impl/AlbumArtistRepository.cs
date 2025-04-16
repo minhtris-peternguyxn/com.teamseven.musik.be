@@ -101,5 +101,20 @@ namespace com.teamseven.musik.be.Repositories.impl
                 )
                 .ToListAsync();
         }
+
+        public async Task<IEnumerable<int>?> GetArtistIdsInAlbumAsync(int albumId)
+        {
+            // Kiểm tra Album tồn tại
+            var albumExists = await _context.Albums.AnyAsync(a => a.AlbumId == albumId);
+            if (!albumExists)
+                throw new KeyNotFoundException($"Album with AlbumId {albumId} not found.");
+
+            // truy van list int
+            return await _context.AlbumArtists
+                .Where(aa => aa.AlbumId == albumId)
+                .Select(aa => aa.ArtistId)
+                .ToListAsync();
+        }
+
     }
 }

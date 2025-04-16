@@ -10,6 +10,7 @@
         Task<IEnumerable<AlbumArtist>> GetAllAlbumArtistsAsync();
         Task<AlbumArtist?> GetAlbumArtistAsync(int albumId, int artistId);
         Task<IEnumerable<Artist>?> GetArtistsInAlbumAsync(int albumId);
+        Task<IEnumerable<int>?> GetArtistIdsInAlbumAsync(int albumId);
         Task<IEnumerable<Album>?> GetAlbumWithArtistIdAsync(int artistId);
         Task RemoveAlbumArtistAsync(int albumId, int artistId);
     }

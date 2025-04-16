@@ -5,10 +5,10 @@ namespace com.teamseven.musik.be.Services.Interfaces
 {
     public interface IAlbumService
     {
-        Task<IEnumerable<Album>> GetAllAlbumsAsync();
-        Task<Album> GetAlbumByIdAsync(int id);
+        Task<IEnumerable<AlbumResponse>> GetAllAlbumsAsync();
+        Task<AlbumResponse> GetAlbumByIdAsync(int id);
 
-        Task<IEnumerable<Album>?> GetAlbumByNameAsync(string name);
+        Task<IEnumerable<AlbumResponse>?> GetAlbumByNameAsync(string name);
 
         Task<IEnumerable<Artist>?> GetArtistsInAlbumAsync(int albumId);
 
